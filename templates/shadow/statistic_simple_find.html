@@ -1,0 +1,220 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li><a href="{% url 'statistic'%}"><i class=""></i> Статистика</a></li>
+            <li class="active"><span><i class=""></i> Статистика по простому поиску</span></li>
+        </ol>
+    </div>
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика по простому поиску</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество поисковых запросов</b> - {{ statistic_simple.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов (за - {{ now }})</b> - {{ len_list_statistic_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Количество поисковых запросов (коллекция)</b> - {{ len_list_statistic_for_collection }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов по коллекциям (за - {{ now }})</b> - {{ len_list_statistic_for_collection_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Количество поисковых запросов (производитель)</b> - {{ len_list_statistic_for_manafactor }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов по производителям (за - {{ now }})</b> - {{ len_list_statistic_for_manafactor_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                </ol>
+
+                <ol>
+                </ol>
+
+<!--Блок для вывода статистики по поиску (общий) - начало-->
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Общая статистика поисковых запросов</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%"><b>Общее количество поисковых запросов</b> - {{ statistic_simple.count }}</h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%">
+                        <b>Общаяя статистика запросов</b> (полный период)<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_single_find in spisok_find %}
+                            <li style="font-size: 80%">
+                                <a href=""><b>{{ result_single_find.name_manafacturer_collection }} ({{ result_single_find.prosent }}%)</b></a>
+                                <span class="count">{{ result_single_find.kol_povtor }}</span>
+                                <span class="index" style="width: {{ result_single_find.prosent }}%">({{ result_single_find.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    <br>
+
+                    <h5 align="center" style="font-size: 100%">
+                        &nbsp;<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        &nbsp;<br>
+                        <b>Подробная общаяя статистика за день</b> ({{ now }})<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_single_find_now in spisok_find_now %}
+
+                            <li style="font-size: 80%">
+                                <a href=""><b>{{ result_single_find_now.name_manafacturer_collection_now }} ({{ result_single_find_now.prosent }}%)</b></a>
+                                <span class="count">{{ result_single_find_now.kol_povtor }}</span>
+                                <span class="index" style="width: {{ result_single_find_now.prosent }}%">({{ result_single_find_now.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    &nbsp;<br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                </ol>
+<!--Блок для вывода статистики по поиску (общий) - конец-->
+
+            </ol>
+        </div>
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+
+<!--Блок для вывода статистики по поиску по производителям - начало-->
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика поисковых запросов (производитель)</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%"><b>Количество поисковых запросов по производителям</b> - {{ len_list_statistic_for_manafactor }}</h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%">
+                        <b>Статистика запросов по производителям</b> (полный период)<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_single_manafacturer in spisok_find_manafacturer %}
+                            <li style="font-size: 80%">
+                                <a href=""><b>{{ result_single_manafacturer.name_manafacturer_collection }} ({{ result_single_manafacturer.prosent }}%)</b></a>
+                                <span class="count">{{ result_single_manafacturer.kol_povtor }}</span>
+                                <span class="index" style="width: {{ result_single_manafacturer.prosent }}%">({{ result_single_manafacturer.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    <br>
+
+                    <h5 align="center" style="font-size: 100%">
+                        &nbsp;<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        &nbsp;<br>
+                        <b>Подробная статистика по производителям за день</b> ({{ now }})<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_single_manafacturer_now in spisok_find_manafacturer_now %}
+
+                            <li style="font-size: 80%">
+                                <a href=""><b>{{ result_single_manafacturer_now.name_manafacturer_now }} ({{ result_single_manafacturer_now.prosent }}%)</b></a>
+                                <span class="count">{{ result_single_manafacturer_now.kol_povtor }}</span>
+                                <span class="index" style="width: {{ result_single_manafacturer_now.prosent }}%">({{ result_single_manafacturer_now.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    &nbsp;<br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+<!--Блок для вывода статистики по поиску по производителям - конец-->
+
+<!--Блок для вывода статистики по поиску по коллекциям - начало-->
+                    &nbsp;<br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика поисковых запросов (коллекция)</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%"><b>Количество поисковых запросов по коллекциям</b> - {{ len_list_statistic_for_collection }}</h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%">
+                        <b>Статистика запросов по коллекциям</b> (полный период)<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                                        <!--+++++++++++++++++++++++++-->
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_single_collection in spisok_find_collection %}
+
+                            <li style="font-size: 80%">
+                                <a href=""><b>{{ result_single_collection.name_collection }} ({{ result_single_collection.prosent }}%)</b></a>
+                                <span class="count">{{ result_single_collection.kol_povtor }}</span>
+                                <span class="index" style="width: {{ result_single_collection.prosent }}%">({{ result_single_collection.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+
+                    </div>
+                    <br>
+
+                    <!--+++++++++++++++++++++++++-->
+
+                    <h5 align="center" style="font-size: 100%">
+                        &nbsp;<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        &nbsp;<br>
+                        <b>Подробная статистика по коллекциям за день</b> ({{ now }})<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_single_collection in spisok_find_collection_now %}
+
+                            <li style="font-size: 80%">
+                                <a href=""><b>{{ result_single_collection.name_collection }} ({{ result_single_collection.prosent }}%)</b></a>
+                                <span class="count">{{ result_single_collection.kol_povtor }}</span>
+                                <span class="index" style="width: {{ result_single_collection.prosent }}%">({{ result_single_collection.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    &nbsp;<br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+<!--Блок для вывода статистики по поиску по коллекциям - конец-->
+
+                </ol>
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

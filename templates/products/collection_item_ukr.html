@@ -1,0 +1,81 @@
+    <div class="col-lg-3 product_item">
+        <div class="parent">
+            <div class="child" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <div>
+                    <a href="{% url 'collection_singl_ukr' collection_for_manufacturer_web.name_collection.id %}">
+                        <img src="{{ collection_for_manufacturer_web.image_collection.url }}" class="img-responsive">
+                        {% if collection_for_manufacturer_web.name_collection.name_collection_nhs != None %}
+                            <span style="position: absolute; top: 6%; background: orange; color: black;
+                            font-weight: 600; margin-left: 5px; padding-bottom: 3px; padding-right: 8px;
+                            padding-top: 3px; padding-left: 8px; box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                                {{ collection_for_manufacturer_web.name_collection.name_collection_nhs.name_collection_nhs_ukr }}
+                            </span>
+                        {% endif %}
+                    </a>
+                </div>
+                <div>
+                    <a href="{% url 'collection_singl_ukr' collection_for_manufacturer_web.name_collection.id %}">
+                        <h5 class="text-center" style="line-height: 1.5; margin-bottom: 0px;">
+                            <strong>{{ manufacturer_singl_web.name_manufacturer }}</strong><br>
+                            <span>
+
+                                <strong><b>{{ collection_for_manufacturer_web.name_collection }}</b></strong>
+                            </span>
+                        </h5>
+
+                        <h5 class="text-center" style="margin-top: 0px; margin-bottom: 0px;">
+                            <div class="for_collection_products_item_bloc" style="margin-bottom: 0px; line-height: 1.5">
+                                {{ collection_for_manufacturer_web.name_collection.short_description_collection_ukr | truncatechars_html:280 | safe }}
+
+                            </div>
+                        </h5>
+                    </a>
+<!--+++++++++++++++++++++++++++-->
+                    <ul class="nav nav-pills">
+                        <li class="dropdown btn-lg btn-block" style="background-color: #ffa500; padding: 0px 0px">
+                            <a class="dropdown-toggle" data-toggle="dropdown" align="center" style="color: #000">Типи плітки&nbsp;<b class="caret"></b>
+                            </a>
+                            <ul id="menu1" class="dropdown-menu" style="border-radius: 0px; width: 100%">
+                                {% for dict_web in dict_for %}
+                                    {% if dict_web.id_collection == collection_for_manufacturer_web.name_collection.id %}
+                                        {% for type in dict_web.type_product_down %}
+                                            <li>
+                                                <a name="menu_low" href="{% url 'collection_singl_ukr' collection_for_manufacturer_web.name_collection.id %}#{{ type.yacor }}">
+                                                    {{ type.name_product_type_ukr }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <a href="{% url 'collection_singl_ukr' collection_for_manufacturer_web.name_collection.id %}">
+                        <h5 class="text-center">
+                            <div class="for_collection_products_item_bloc" style="margin-bottom: 0px; padding-bottom: 0px; padding-top: 0px;">
+                                {% for dict_web_text in dict_for %}
+                                    {% if dict_web_text.id_collection == collection_for_manufacturer_web.name_collection.id %}
+                                        <p style="font-weight: 700; font-size: 90%;">&nbsp;Кількість моделей плітки&nbsp;-&nbsp;{{ dict_web_text.len_product }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </h5>
+                    </a>
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'collection_singl_ukr' collection_for_manufacturer_web.name_collection.id %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px">Детальніше</button>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+

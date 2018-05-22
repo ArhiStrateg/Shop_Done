@@ -1,0 +1,136 @@
+{% extends "base_ukr.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ main_info.keyword_ukr }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ main_info.description_ukr }}">
+{% endblock meta_description %}
+
+{% block title %}
+{{ main_info.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ main_info.title_ukr }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ main_info.title_ukr }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ main_info.description_ukr }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+    <div class="cd-slider">
+        <ul>
+            {% for image in img_main %}
+                <li>
+                    <div class="image" style="background-image:url({{ image.image_main.url }})"></div>
+                    <div class="content">
+                        <div class="word_slider">
+                            <h2 style="font-size: 80%; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+                             margin-right: 20px; border-top-width: 10px;">
+                                {{ image.text_for_main_img_ukr }}
+                            </h2 >
+                        </div>
+                      </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+<!--Слайдер - конец-->
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        {% for nhs_for_web in nhs %}
+            {% if nhs_for_web.id == 1 %}
+                <div><h2><b style="padding-left: 15px">
+                    {{ nhs_for_web.name_collection_nhs_ukr }}
+                </b></h2></div>
+            {% endif %}
+        {% endfor %}
+    </ol>
+
+    <ol>
+        <span style="font-size: 2%">&nbsp;</span>
+    </ol>
+
+</div>
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <div class="col-lg-12">
+            {% for collection_for_manufacturer_web in collection_for_main %}
+                {% if collection_for_manufacturer_web.name_collection.name_collection_nhs.id == 1 %}
+                    {% include 'products/collection_item_main_ukr.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        {% for nhs_for_web in nhs %}
+            {% if nhs_for_web.id == 2 %}
+                <div><h2><b style="padding-left: 15px">
+                    {{ nhs_for_web.name_collection_nhs_ukr }}
+                </b></h2></div>
+            {% endif %}
+        {% endfor %}
+    </ol>
+
+    <ol>
+        <span style="font-size: 2%">&nbsp;</span>
+    </ol>
+
+</div>
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <div class="col-lg-12">
+            {% for collection_for_manufacturer_web in collection_for_main %}
+                {% if collection_for_manufacturer_web.name_collection.name_collection_nhs.id == 2 %}
+                    {% include 'products/collection_item_main_ukr.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        {% for nhs_for_web in nhs %}
+            {% if nhs_for_web.id == 3 %}
+                <div><h2><b style="padding-left: 15px">
+                    {{ nhs_for_web.name_collection_nhs_ukr }}
+                </b></h2></div>
+            {% endif %}
+        {% endfor %}
+    </ol>
+
+    <ol>
+        <span style="font-size: 2%">&nbsp;</span>
+    </ol>
+
+</div>
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <div class="col-lg-12">
+            {% for collection_for_manufacturer_web in collection_for_main %}
+                {% if collection_for_manufacturer_web.name_collection.name_collection_nhs.id == 3 %}
+                    {% include 'products/collection_item_main_ukr.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

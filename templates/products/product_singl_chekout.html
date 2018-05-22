@@ -1,0 +1,84 @@
+
+    <div class="modal-dialog" style="width: 60%">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px; border-bottom: 0px;padding-top: 10px;padding-right: 10px;padding-bottom: 0px;padding-left: 0px;">
+                <div align="right">
+                    <button class="block_collection btn-class" type="button" data-dismiss="modal"
+                            style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px; padding-right: 5px; margin-right: 20px; margin-bottom: 10px; margin-top: 10px;">
+                        Закрыть окно
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body" style="padding-top: 0px; padding-bottom: 0px;">
+                <div class="row">
+                    <div class="col-lg-6">
+
+
+
+                        <img src="{{ list_product.img_for_web.image.url }}" class="img-responsive img-center-product">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="tab-content product-description-tabs">
+                            <div role="tabpanel" class="tab-pane active" id="description">
+                                <div style="padding-top: 10px; padding-left: 20px; padding-right: 20px;padding-bottom: 20px; line-height: 1.5">
+
+                                    <div align="center" style="padding-top: 0px">
+                                        <h5 style="font-size: 250%; margin-left: 5px"><b>{{ product_in_bascet.product.name_product }}</b></h5>
+                                        <h5 style="font-size: 90%; margin-left: 5px"><b>Коллекция: {{ product_in_bascet.product.collection_product.name_collection }}</b></h5>
+                                    </div>
+                                    <div style="padding-top: 0px">
+                                        <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 3px solid #ffbf00">
+                                        <h5 style="font-size: 100%">
+                                            <div style="margin-top: 50px">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><b><span style="font-size: 90%;">Тип: </span></b></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><span style="font-size: 90%;">{{ product_in_bascet.product.product_type_product.name_product_type }}</span></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><b><span style="font-size: 90%;">Наличие: </span></b></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;">
+                                                            <span style="font-size: 90%;">
+                                                                {{ product_in_bascet.product.collection_product.availability_collection.name_availability }}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><b><span style="font-size: 90%;">Размер: </span></b></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><span style="font-size: 90%;">{{ product_in_bascet.product.size_product }}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><b><span style="font-size: 90%;">Код продукта: </span></b></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><span style="font-size: 90%;">{{ product_in_bascet.product.vendor_code_product }}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><b><span style="font-size: 90%;">Цена: </span></b></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><span style="font-size: 90%;">По запросу</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><b><span style="font-size: 90%;">Страна-производитель: </span></b></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;">
+                                                            <span style="font-size: 90%;">
+                                                                {{ product_in_bascet.product.collection_product.manufacturer_collection.manufacturer_country.name_manufacturer_country }}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px">
+
+            </div>
+        </div>
+    </div>
+

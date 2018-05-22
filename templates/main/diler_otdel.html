@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ diler_otdelt_info.keyword }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ diler_otdelt_info.description }}">
+{% endblock meta_description %}
+
+{% block title %}
+    {{ diler_otdelt_info.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ diler_otdelt_info.title }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ diler_otdelt_info.title }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ diler_otdelt_info.description }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <li><a href="{% url 'main'%}"><i class=""></i> Главная</a></li>
+        <li class="active"><span><i class=""></i> Дилерский отдел</span></li>
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+
+        <div class="col-lg-3" style="padding-left: 40px">
+            <h1>Дилерский отдел</h1>
+        </div>
+        <div class="col-lg-6" style="padding-top: 20px; line-height: 1.5">
+            {% for info in all_info_diler_otdel %}
+                {{ info.text_diler_otdel | safe }}
+            {% endfor %}
+        </div>
+
+        <div class="col-lg-3">
+            <h5 style="font-size: 120%; margin-left: 5px"><b>Дилерский отдел:</b></h5>
+            <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                <h5 style="font-size: 90%">
+                    {% for phone in all_info_diler_otdel %}
+                    <table>
+                        <td>
+                            <tr><b>{{ phone.text_phone_1_for_do }}: </b></tr>
+                            <tr>{{ phone.phone_1_for_do }}</tr><br>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>{{ phone.text_phone_2_for_do }}: </b></tr>
+                            <tr>{{ phone.phone_2_for_do }}</tr>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>{{ phone.text_phone_3_for_do }}: </b></tr>
+                            <tr>{{ phone.phone_3_for_do }}</tr>
+                        </td>
+                    </table>
+                    {% endfor %}
+                </h5>
+
+            <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Время работы:</b></h5>
+            <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                 <h5 style="font-size: 90%">
+                    {% for time in all_info_diler_otdel %}
+                    <table>
+                        <td>
+                            <tr><b>{{ time.time_work_b_time }} </b></tr>
+                            <tr>{{ time.time_work_b }}</tr>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>{{ time.time_work_s_time }} </b></tr>
+                            <tr>{{ time.time_work_s }}</tr>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>{{ time.time_work_v_time }} </b></tr>
+                            <tr>{{ time.time_work_v }}</tr>
+                        </td>
+                    </table>
+                    {% endfor %}
+                </h5>
+
+
+            <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Контакты Сотрудников</b></h5>
+            <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+            <div class="col-lg-12">
+                <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                        style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                        margin-top: 10px"
+                        data-toggle="dropdown">
+                    Список сотрудников
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="width: 100%; border-radius: 0px">
+                    {% for contscts in all_info_contscts %}
+                        <li>
+                            <a class="small" data-value="{{ contscts.id }}" name="search_hight"
+                                value={{ contscts.id }} tabIndex="-1">
+                                    <b>&nbsp;{{ contscts.fio }}<br></b>
+                                    &nbsp;{{ contscts.dolgnost }}<br>
+                                    &nbsp;{{ contscts.phone }}<br>
+                                    &nbsp;{{ contscts.email }}<br>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--+++++++++++++++++++++++++++++++++++-->
+
+
+
+<form method="GET">
+
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2><b style="padding-left: 15px">Быстрый поиск</b></h2>
+                </div>
+
+<!--Параметры поиска по ПРОИЗВАДИТЕЛЮ - начало -->
+                <div class="col-lg-3">
+                    <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                            style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                            margin-top: 10px"
+                            data-toggle="dropdown">
+                        Выберите производителя
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="width: 100%">
+                        {% for manafacturer_search_hight_web in manafacturer_search_hight %}
+                            <li><a class="small" data-value="{{ manafacturer_search_hight_web.id }}" name="search_hight"
+                                   value={{ manafacturer_search_hight_web.id }} tabIndex="-1">
+                                <input name="manafacturer" value={{ manafacturer_search_hight_web.id }} type="checkbox"/>
+                                &nbsp;{{ manafacturer_search_hight_web.name_manufacturer }}
+                            </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+<!--Параметры поиска по ПРОИЗВАДИТЕЛЮ - начало -->
+
+<!--Параметры поиска по СТРАНЕ - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Выберите страну
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for country_web in country %}
+                                <li><a class="small" data-value="{{ country_web.id }}" name="search_hight"
+                                       value={{ country_web.id }} tabIndex="-1">
+                                    <input name="country" value={{ country_web.id }} type="checkbox"/>
+                                    &nbsp;{{ country_web.name_manufacturer_country }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+<!--Параметры поиска по СТРАНЕ - конец -->
+
+<!--Параметры поиска по ЦЕНОВОМУ ДИАППАЗОНУ - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Выберите ценовой диапазон
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for price_web in price %}
+                                <li><a class="small" data-value="{{ price_web.id }}" name="search_hight"
+                                       value={{ price_web.id }} tabIndex="-1">
+                                    <input name="price" value={{ price_web.id }} type="checkbox"/>
+                                    &nbsp;{{ price_web.name_price_group }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+<!--Параметры поиска по ЦЕНОВОМУ ДИАППАЗОНУ - конец -->
+
+
+                <div class="col-lg-9 col-lg-offset-3" style="margin-top: 10px">
+                    <p><input class="btn btn-lg btn-block btn-success" type="submit" name="find" value="Искать"></p>
+                </div>
+
+                <div class="col-lg-9 col-lg-offset-3" style="margin-top: 10px">
+                    <p><input class="btn btn-lg btn-block btn-success" type="submit" name="cancel" value="Сбросить фильтр поиска"></p>
+                </div>
+
+            </div>
+        </div>
+    </ol>
+</div>
+
+</form>
+
+{% if view_all_help == True %}
+    <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+        <ol class="breadcrumb breadcrumb-arrow">
+            <div class="section">
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <h4><b style="padding-left: 15px">Критерии поиска: </b></h4>
+                    </div>
+
+                    <div class="col-lg-9">
+
+                        {% if view_all_manafacturer == True %}
+                            <h5>
+                                <span><b>Производитель:&nbsp;</b></span>
+                                {% for manafacturer_info in info_manafacturer_veb %}
+                                    <span>&nbsp;{{ manafacturer_info.name_manufacturer }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_country == True %}
+                            <h5>
+                                <span><b>Страна:&nbsp;</b></span>
+                                {% for country_info in info_country_veb %}
+                                    <span>&nbsp;{{ country_info.name_manufacturer_country }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_price == True %}
+                            <h5>
+                                <span><b>Ценовой диаппазон:&nbsp;</b></span>
+                                {% for price_info in info_price_veb %}
+                                    <span>&nbsp;{{ price_info.name_price_group }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </ol>
+    </div>
+{% endif %}
+
+
+
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    {% if resilt_collections_images != Null %}
+            {% for result_only_c in resilt_collections_images %}
+                    {% include 'products/collection_for_search.html' %}
+            {% endfor %}
+    {% endif %}
+</div>
+
+<!--Пагинация страницы - начало-->
+{% if response_view == True %}
+    <div class="section" align="center">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if resilt_collections_images.has_previous %}
+                            <a href="{{ response_for_web.response }}&page={{ resilt_collections_images.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ resilt_collections_images.number }} of {{ resilt_collections_images.paginator.num_pages }}.
+                        </span>
+
+                        {% if resilt_collections_images.has_next %}
+                            <a href="{{ response_for_web.response }}&page={{ resilt_collections_images.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+{% if response_view == False %}
+    <div class="section" align="center">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if resilt_collections_images.has_previous %}
+                            <a href="?page={{ resilt_collections_images.previous_page_number }}">назад</a>
+                        {% endif %}
+
+                        <span class="current">
+                            страница {{ resilt_collections_images.number }} из {{ resilt_collections_images.paginator.num_pages }}
+                        </span>
+
+                        {% if resilt_collections_images.has_next %}
+                            <a href="?page={{ resilt_collections_images.next_page_number }}">вперед</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!--Пагинация страницы - конец-->
+
+{% endblock content %}

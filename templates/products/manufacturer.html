@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ manufacturers_info.keyword }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ manufacturers_info.description }}">
+{% endblock meta_description %}
+
+{% block title %}
+{{ manufacturers_info.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ manufacturers_info.title }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ manufacturers_info.title }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ manufacturers_info.description }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 25px;">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main'%}"><i class=""></i> Главная</a></li>
+        <li class="active"><span><i class=""></i> Каталог</span></li>
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <div class="col-lg-3" style="padding-left: 40px">
+            <h1>Каталог</h1>
+        </div>
+        <div class="col-lg-6" style="padding-top: 20px; line-height: 1.5">
+            {% for text in text_and_img_manufacturers %}
+                {{ text.text | safe }}
+            {% endfor %}
+        </div>
+        <div class="col-lg-3">
+            {% for img in text_and_img_manufacturers %}
+                <img src="{{ img.image_catalog_main.url }}" class="img-responsive" style="margin-top: 2px;">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="collection_products_item" style="padding-top: 0; padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2><b style="padding-left: 15px">Фабрики</b></h2>
+                </div>
+                <form action="{% url 'manufacturer' %}" method="GET">
+
+                    <div class="col-lg-2" style="margin-top: 5px;">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"
+                                data-toggle="dropdown">
+                            Выберите страну
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for country_web in country %}
+                                <li><a class="small" data-value="{{ country_web.id }}" name="search_hight" value={{ country_web.id }} tabIndex="-1"><input name="country" value={{ country_web.id }} type="checkbox"/>&nbsp;{{ country_web.name_manufacturer_country }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2" style="margin-top: 6px;">
+                        <p>
+                            <input class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px"
+                                  type="submit" name="find" value="Искать">
+                        </p>
+                    </div>
+
+                    <div class="col-lg-2" style="margin-top: 6px;">
+                        <p>
+                            <input class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px"
+                                   type="submit" name="cancel" value="Сбросить фильтр поиска">
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ol>
+</div>
+
+{% if view_all_help == True %}
+    <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <div class="section">
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <h4><b style="padding-left: 15px">Критерии поиска: </b></h4>
+                    </div>
+                    <div class="col-lg-9" valign="center">
+                        {% if view_all_country == True %}
+                            <h5>
+                                <span><b>Страна:&nbsp;</b></span>
+                                {% for country_info in info_country_veb %}
+                                    <span>&nbsp;{{ country_info.name_manufacturer_country }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </ol>
+    </div>
+{% endif %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    {% for manufacturer_for_web in manufacturers %}
+            {% include 'products/manufacturer_item.html' %}
+    {% endfor %}
+</div>
+
+<!--Пагинация страницы - начало-->
+{% if response_view == True %}
+    <div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+        <div class="row example-pagination">
+            <div class="col-md-12">
+                <ul class="pagination" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+
+                    {% if manufacturers.has_previous %}
+                        <li class="active">
+                            <a href="{{ response_for_web.response }}&page={{ manufacturers.previous_page_number }}">
+                                назад
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="disabled">
+                        <a>страница {{ manufacturers.number }} из {{ manufacturers.paginator.num_pages }}</a>
+                    </li>
+
+                    {% if manufacturers.has_next %}
+                        <li class="active">
+                            <a href="{{ response_for_web.response }}&page={{ manufacturers.next_page_number }}">
+                                вперед
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+{% if response_view == False %}
+    <div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+        <div class="row example-pagination">
+            <div class="col-md-12">
+                <ul class="pagination" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+
+                    {% if manufacturers.has_previous %}
+                        <li>
+                            <a href="?page={{ manufacturers.previous_page_number }}">
+                                назад
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="disabled">
+                        <a>страница {{ manufacturers.number }} из {{ manufacturers.paginator.num_pages }}</a>
+                    </li>
+
+                    {% if manufacturers.has_next %}
+                        <li>
+                            <a href="?page={{ manufacturers.next_page_number }}">
+                                вперед
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+<!--Пагинация страницы - конец-->
+
+{% endblock content %}
+

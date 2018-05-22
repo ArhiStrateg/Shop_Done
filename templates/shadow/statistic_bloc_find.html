@@ -1,0 +1,200 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li><a href="{% url 'statistic'%}"><i class=""></i> Статистика</a></li>
+            <li class="active"><span><i class=""></i> Статистика по блочному поиску</span></li>
+        </ol>
+    </div>
+
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика по блочному поиску</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество блочных запросов</b> - {{ statistics_bloc.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество блочных запросов (за - {{ now }})</b> - {{ len_list_statistic_bloc_now }}
+                        </span>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Количество блочных запросов в расширенном поиске</b> - {{ len_list_statistic_for_bloc_search }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов (за - {{ now }})</b> - {{ len_list_statistic_for_bloc_search_now }}
+                        </span>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Количество блочных запросов исключая расширенный поиск</b> - {{ len_list_statistic_for_minus_bloc_search }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов (за - {{ now }})</b> - {{ len_list_statistic_for_minus_bloc_search_now }}
+                        </span>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                </ol>
+
+                <ol>
+                </ol>
+
+<!--Блок для вывода статистики по поиску (общий) - начало-->
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Общая статистика блочных запросов</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%">
+                        <b>Общая статистика блочных запросов </b> (полный период)<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_for_web_blok_web in result_for_web_blok %}
+                            <li style="font-size: 80%">
+                                <a><b>{{ result_for_web_blok_web.name_collection }} ({{ result_for_web_blok_web.prosent }}%)</b></a>
+                                <span class="count">{{ result_for_web_blok_web.povtor }}</span>
+                                <span class="index" style="width: {{ result_for_web_blok_web.prosent }}%">({{ result_for_web_blok_web.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <h5 align="center" style="font-size: 100%">
+                        &nbsp;<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        &nbsp;<br>
+                        <b>Подробная статистика по блочным запросам за день</b> ({{ now }})<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for results_for_web_blok_now in result_for_web_blok_now %}
+                            <li style="font-size: 80%">
+                                <a><b>{{ results_for_web_blok_now.name_collection }} ({{ results_for_web_blok_now.prosent }}%)</b></a>
+                                <span class="count">{{ results_for_web_blok_now.povtor }}</span>
+                                <span class="index" style="width: {{ results_for_web_blok_now.prosent }}%">({{ results_for_web_blok_now.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    &nbsp;<br>
+                </ol>
+<!--Блок для вывода статистики по поиску (общий) - конец-->
+            </ol>
+        </div>
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+<!--Блок статистики (расширенный поиск) - начало-->
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Cтатистика блочных запросов в расширенном поиске</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%">
+                        <b>Cтатистика блочных запросов в расширенном поиске</b> (полный период)<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_for_web_blok_web_sh in result_for_web_blok_sh %}
+                            <li style="font-size: 80%">
+                                <a><b>{{ result_for_web_blok_web_sh.name_collection }} ({{ result_for_web_blok_web_sh.prosent }}%)</b></a>
+                                <span class="count">{{ result_for_web_blok_web_sh.povtor }}</span>
+                                <span class="index" style="width: {{ result_for_web_blok_web_sh.prosent }}%">({{ result_for_web_blok_web_sh.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+
+                    </div>
+                    <br>
+
+                    <h5 align="center" style="font-size: 100%">
+                        &nbsp;<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        <!--&nbsp;<br>-->
+                        <b>Подробная статистика по блочным запросам за день</b> ({{ now }})<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for results_for_web_blok_sh_now in result_for_web_blok_sh_now %}
+
+                            <li style="font-size: 80%">
+                                <a><b>{{ results_for_web_blok_sh_now.name_collection }} ({{ results_for_web_blok_sh_now.prosent }}%)</b></a>
+                                <span class="count">{{ results_for_web_blok_sh_now.povtor }}</span>
+                                <span class="index" style="width: {{ results_for_web_blok_sh_now.prosent }}%">({{ results_for_web_blok_sh_now.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+
+                    </div>
+                    &nbsp;<br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    &nbsp;<br>
+<!--Блок статистики (расширенный поиск) - конец-->
+
+<!--Блок статистики (исключая расширенный поиск) - начало-->
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Cтатистика блочных запросов исключая расширенный поиск</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 100%">
+                        <b>Cтатистика блочных запросов исключая расширенный поиск</b> (полный период)<br>
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_is_sh in result_for_web_blok_is_sh %}
+                            <li style="font-size: 80%">
+                                <a><b>{{ result_is_sh.name_collection }} ({{ result_is_sh.prosent }}%)</b></a>
+                                <span class="count">{{ result_is_sh.povtor }}</span>
+                                <span class="index" style="width: {{ result_is_sh.prosent }}%">({{ result_is_sh.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+
+                    </div>
+                    <br>
+
+                    <h5 align="center" style="font-size: 100%">
+                        &nbsp;<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        <!--&nbsp;<br>-->
+                        <b>Подробная статистика блочных запросов исключая расширенный поиск</b> ({{ now }})<br>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                        <span align="center" style="font-size: 80%">
+                            <b>(Отображение запросов больших 9%)</b>
+                        </span>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for result_blok_is_sh_now in result_for_web_blok_is_sh_now %}
+
+                            <li style="font-size: 80%">
+                                <a><b>{{ result_blok_is_sh_now.name_collection }} ({{ result_blok_is_sh_now.prosent }}%)</b></a>
+                                <span class="count">{{ result_blok_is_sh_now.povtor }}</span>
+                                <span class="index" style="width: {{ result_blok_is_sh_now.prosent }}%">({{ result_blok_is_sh_now.prosent }}%)</span>
+                            </li>
+                        {% endfor %}
+
+                    </div>
+                    &nbsp;<br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+<!--Блок статистики (исключая расширенный поиск) - конец-->
+
+
+                </ol>
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

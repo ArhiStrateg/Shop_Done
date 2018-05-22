@@ -1,0 +1,117 @@
+        <div class="parent">
+            <div class="child" style="box-shadow: 0 0 5px rgba(0,0,0,0.2); margin-bottom: 10px;">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 10px;">
+
+                        <form style="margin-bottom: 0px;" action='{% url "collection_singl" collection_for_web.id_patch %}'>
+                            <button class="knopka" type="submit"
+                               style="padding-left: 5px;padding-top: 5px;padding-right: 5px;color: #999999;padding-bottom: 5px; border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;border-bottom-width: 0px; margin-bottom: -9px;">
+                                <div style="background-image: url(/media/logo/bg_r.jpg); background-position: left bottom; background-repeat: repeat-y; padding-left: 0px;padding-right: 0px;">
+                                    <div class="block_main_collection">
+                                        <img src="{{ collection_for_web.image_collection_mini.url }}" class="img-responsive" alt="Image" style="width: 100%;">
+                                        {% if collection_for_web.name_collection_nhs != None %}
+                                            <span style="font-size: 80%;position: absolute; left: 7%; top: 3%; background: orange; color: black;
+                                            font-weight: 600; margin-left: 5px; padding-bottom: 3px; padding-right: 8px;
+                                            padding-top: 3px; padding-left: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+                                                {{ collection_for_web.name_collection_nhs }}
+                                            </span>
+                                        {% endif %}
+
+                                        <h2 class="text-center" style="line-height: 1.5; margin-bottom: 0px; color: #000000; min-height: 40px;
+                                        display: flex; justify-content: center; align-items: center;">
+                                            <div style="font-size: 50%;">
+                                                <strong>
+                                                    {{ collection_for_web.name_collection }}
+                                                </strong>
+                                            </div>
+                                        </h2>
+
+                                        <h5 class="text-center" style="margin-top: 0px; margin-bottom: 0px; color: #000000;">
+
+                                            <div class="visible-sm visible-md visible-lg">
+                                                <div class="for_collection_products_item_bloc" style="display: flex; justify-content: center; align-items: center;
+                                                padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; line-height: 1.5; min-height: 170px;">
+                                                    <p style="margin-bottom: 0px; font-weight: 700; opacity: 0.80">
+                                                        <span>{{ collection_for_web.description_collection_mini | truncatechars_html:120 | safe }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="visible-xs">
+                                                <div class="for_collection_products_item_bloc" style="display: flex; justify-content: center; align-items: center;
+                                                padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px; line-height: 1.5;">
+                                                    <p style="margin-bottom: 0px; font-weight: 700; opacity: 0.80">
+                                                        <span>{{ collection_for_web.description_collection_mini | truncatechars_html:120 | safe }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </h5>
+
+                                        <h5 class="text-center">
+                                            <div class="for_collection_products_item_bloc" style="margin-bottom: 0px; padding-bottom: 0px; padding-top: 0px;">
+                                                {% for dict_web_text in dict_for %}
+                                                    {% if dict_web_text.id_collection == collection_for_web.id %}
+                                                        <p style="font-weight: 700; font-size: 90%; margin-bottom: 0px;"> Количество моделей плитки</p>
+                                                        <p style="font-weight: 700; font-size: 100%;">{{ dict_web_text.len_product }}</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </h5>
+
+                                    </div>
+
+                                    <ul class="nav nav-pills">
+                                        <li class="dropdown btn-lg btn-block" style="background-color: #ffa500; padding: 0px 0px">
+                                            <a class="dropdown-toggle btn-class" data-toggle="dropdown" align="center"
+                                               style="color: #000; background: #fefcea; background: linear-gradient(to top, #fff, #f9f9f9);
+                                                padding: 10px; border: 0px">
+                                                <div class="block_collection" >
+                                                    <b>Типы плитки</b>
+                                                    <b class="caret"></b>
+                                                </div>
+                                            </a>
+                                            <ul id="menu1" class="dropdown-menu" style="border-radius: 0px; width: 100%; margin-top: 8px; padding-top: 0px; padding-bottom: 0px;">
+                                                {% for dict_web in dict_for %}
+                                                    {% if dict_web.id_collection == collection_for_web.id %}
+                                                        {% for type in dict_web.type_product_down %}
+                                                            <hr style="margin-bottom: 0px; margin-top: 0px;">
+                                                            <li>
+                                                                <a style="width: auto; font-size: 80%" name="normal"
+                                                                   href="{% url 'collection_singl' collection_for_web.id_patch %}#{{ type.yacor }}">
+
+                                                                    <div class="visible-sm visible-md visible-lg">
+                                                                        <p align="center" style="margin-bottom: 0px; white-space: pre-wrap">{{ type.name_product_type }}</p>
+                                                                    </div>
+
+                                                                    <div class="visible-xs" style="font-size: 130%">
+                                                                        <p align="center" style="margin-bottom: 0px; white-space: pre-wrap">{{ type.name_product_type }}</p>
+                                                                    </div>
+
+                                                                </a>
+                                                            </li>
+                                                            <hr style="margin-bottom: 0px; margin-top: 0px;">
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+<div class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="inner contact">
+                <div class="contact-form">
+                    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+
+                        <!--{{ form }}-->
+
+                        <div class="col-xs-12 wow animated slideInLeft" data-wow-delay=".5s">
+
+                            <span class="form-error">{{ form.order.errors }}</span>
+                            <input type="file" name="{{ form.order.html_name }}" id="{{ form.order.html_name }}" value="{{ request.POST.order }}" class="form"/>
+
+                            <span class="form-error">{{ form.comment.errors }}</span>
+                            <textarea name="{{ form.comment.html_name }}" id="{{ form.comment.html_name }}" required="required" value="{{ request.POST.comment }}" class="form textarea"  placeholder="Оставте комментарий ..."></textarea>
+
+                        </div>
+                        <div class="relative fullwidth col-xs-12">
+                            <button type="submit" name="save" value="Save comment" class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px">Отправить запрос</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

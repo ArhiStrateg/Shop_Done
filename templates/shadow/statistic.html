@@ -1,0 +1,190 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li class="active"><span><i class=""></i> Статистика</span></li>
+        </ol>
+    </div>
+
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика по простому поиску</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество поисковых запросов</b> - {{ statistic_simple.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов (за - {{ now }})</b> - {{ len_list_statistic_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Количество поисковых запросов (коллекция)</b> - {{ len_list_statistic_for_collection }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов по коллекциям (за - {{ now }})</b> - {{ len_list_statistic_for_collection_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Количество поисковых запросов (производитель)</b> - {{ len_list_statistic_for_manafactor }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов по производителям (за - {{ now }})</b> - {{ len_list_statistic_for_manafactor_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'statistic_simple_find' %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                            </a>
+                        </p>
+                    </div>
+                </ol>
+                <ol>
+                    &nbsp;
+                </ol>
+
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика по блочному поиску</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество блочных запросов</b> - {{ statistic_bloc.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество блочных запросов (за - {{ now }})</b> - {{ len_list_statistic_bloc_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Количество блочных запросов в расширенном поиске</b> - {{ len_list_statistic_for_bloc_search }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов (за - {{ now }})</b> - {{ len_list_statistic_for_bloc_search_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Количество блочных запросов исключая расширенный поиск</b> - {{ len_list_statistic_for_minus_bloc_search }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество поисковых запросов (за - {{ now }})</b> - {{ len_list_statistic_for_minus_bloc_search_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'statistic_bloc_find' %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                            </a>
+                        </p>
+                    </div>
+                </ol>
+            </ol>
+        </div>
+
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика посещений</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество посещений страниц поизводителей</b> - {{ query_set_manafactur.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество посещений страниц поизводителей (за - {{ now }})</b> - {{ query_set_manafacturer_now.count }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество посещений страниц коллекций</b> - {{ query_set_collection.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество посещений страниц коллекций (за - {{ now }})</b> - {{ query_set_collection_now.count }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество посещений страниц продуктов</b> - {{ query_set_product.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество посещений страниц продуктов (за - {{ now }})</b> - {{ query_set_product_now.count }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'statistic_in' %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                            </a>
+                        </p>
+                    </div>
+                </ol>
+                <ol>
+                    &nbsp;
+                </ol>
+
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика посещений времени и пользователей</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество пользователей</b> - {{ all_users.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество пользователей (за - {{ now }})</b> - {{ nmb_all_users_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 100%">
+                        <b>Общее среднее время нахождения на сайте пользователя</b> - {{ mid_time }}<br>
+                        <span style="font-size: 80%">
+                            <b>Среднее время нахождения на сайте пользователя (за - {{ now }})</b> - {{ mid_time_now }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <h5 style="font-size: 90%">
+                        <b>Общее количество ордеров</b> - {{ all_users_buy.count }}<br>
+                        <b>Общее количество проектов отправленных на рассмотрение</b> - {{ all_users_project.count }}
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'time_delta' %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                            </a>
+                        </p>
+                    </div>
+                </ol>
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

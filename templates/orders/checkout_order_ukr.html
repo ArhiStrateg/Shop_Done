@@ -1,0 +1,99 @@
+{% extends 'base_ukr.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% if products_in_bascet %}
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h3 class="text-center">Товари у Вашому кошику</h3>
+
+
+
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Найменування товару</th>
+                                    <th class="text-center">Кількість товару</th>
+                                    <th class="text-center">Цінова категорія товару</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product_in_bascet in products_in_bascet %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'products_singl_ukr' product_in_bascet.product.id %}" target="_blank">
+                                                {{ product_in_bascet.product.name_product }}
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            {{ product_in_bascet.nmb }}
+                                        </td>
+                                        <td>
+                                            {{ product_in_bascet.product.collection_product.price_group_collection }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    <div class="text-center" style="margin-bottom: 20px">
+                        <button type="submit" class="btn btn-lg btn-block btn-success" onclick="location.href='{% url 'checkout_ukr' %}'">Повернутися до редагування замовлення</button>
+                    </div>
+
+                    <form class="form-horizontal" method="post">{% csrf_token %}
+                            <div class="form-group">
+                                <label>Введіть ПІБ: </label>
+                                <span class="form-error">{{ form.name.errors }}</span>
+                                <input type="text" name="{{ form.name.html_name }}" class="form-control"
+                                    value="{{ request.POST.name }}"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Введіть Email: </label>
+                                <span class="form-error">{{ form.email.errors }}</span>
+                                <input type="text" name="{{ form.email.html_name }}" class="form-control"
+                                    value="{{ request.POST.email }}"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Введіть телефон: </label>
+                                <span class="form-error">{{ form.phone.errors }}</span>
+                                <input type="text" name="{{ form.phone.html_name }}" class="form-control"
+                                    value="{{ request.POST.phone }}"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Введіть адресу: </label>
+                                <span class="form-error">{{ form.adress.errors }}</span>
+                                <input type="text" name="{{ form.adress.html_name }}" class="form-control"
+                                    value="{{ request.POST.adress }}"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>Введіть коментар: </label>
+                                <span class="form-error">{{ form.comment.errors }}</span>
+                                <input type="text" name="{{ form.comment.html_name }}" class="form-control"
+                                    value="{{ request.POST.comment }}"
+                                >
+                            </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-lg btn-block btn-success">Зробити замовлення</button>
+                        </div>
+
+                    </form>
+                </div>
+            {% else %}
+                <h2 class="text-center">У Вашій корзині немає товарів</h2>
+            {% endif %}
+            <div class="text-lg-12">
+            </div>
+        </div>
+    </div>
+{% endblock %}

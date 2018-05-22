@@ -1,0 +1,74 @@
+
+    <div class="product_item">
+        <div class="parent">
+            <div class="child" style="box-shadow: 0 0 5px rgba(0,0,0,0.2); margin-bottom: 10px;">
+                <div style="width: auto">
+
+                    {% for list_img_product in list_img_products %}
+                        {% if list_img_product.id == product_image.product.id %}
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                <button class="knopka" href="{{ list_img_product.data_target_re }}" data-toggle="modal"
+                                   data-target="{{ list_img_product.data_target_re }}"
+                                   style="padding-left: 5px;padding-top: 5px;padding-right: 5px;color: #999999;padding-bottom: 5px;
+                                   border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;border-bottom-width: 0px; width: 100%;">
+
+                                    <div style="background-image: url(/media/logo/bg_r.jpg); background-position: left bottom; background-repeat: repeat-y; padding-left: 0px;padding-right: 0px;">
+
+                                    <div class="block_main_collection">
+                                        <img src="{{ product_image.image_mini.url }}" class="img-responsive" alt="Image" style="width: 100%; box-shadow: 0 0 6px rgba(0,0,0,0.3)">
+                                        <h5 class="text-center" style="line-height: 1.5; margin-bottom: 0px; margin-left: 10px;margin-right: 10px;">
+                                            <span>
+                                                {{ product_image.product.collection_product }}
+                                            </span>
+                                            <br>
+
+                                            <div class="visible-lg visible-md visible-sm">
+                                                <div style="display: flex; justify-content: center; align-items: center; min-height: 85px;">
+                                                    <strong>
+                                                        {{ product_image.product.name_product }}
+                                                    </strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="visible-xs">
+                                                <div style="display: flex; justify-content: center; align-items: center;">
+                                                    <strong>
+                                                        {{ product_image.product.name_product }}
+                                                    </strong>
+                                                </div>
+                                            </div>
+
+
+                                        </h5>
+
+                                        <h5 class="text-center" style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 10px;">
+                                            <div class="for_collection_products_item_bloc" style="margin-bottom: 0px; line-height: 1.5">
+                                                Размер: {{ product_image.product.size_product }}<br>
+                                                Код продукта: {{ product_image.product.vendor_code_product }}<br>
+                                                Цена: По запросу
+                                            </div>
+                                        </h5>
+
+                                        </div>
+                                    </div>
+                                </button>
+                                <div class="modal" id="{{ list_img_product.data_target }}" tabindex="-1" role="dialog" name="#mod_{{ list_img_product.data_target }}" >
+                                    <div class="col-lg-8 col-lg-offset-2">
+                                        {% include 'products/product_singl_re.html' %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+

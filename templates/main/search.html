@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main'%}"><i class=""></i> Главная</a></li>
+        <li class="active"><span><i class=""></i> Поиск</span></li>
+    </ol>
+</div>
+
+<br>
+<div style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <h1>Результаты поиска</h1>
+        <br>
+        <h5>{{ send }} - <b>"{{ keyword }}"</b></h5>
+    </ol>
+
+    <ol>
+        &nbsp;
+    </ol>
+</div>
+
+<div class="row" style="padding-right: 40px; padding-left: 40px">
+    {% if list_collections != Null %}
+        {% for result_only_c in list_collections %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product_item">
+            {% include 'products/collection_for_search_low.html' %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="pagination" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                {% if list_collections.has_previous %}
+                    <li>
+                        <a href="{{ response_for_web.response }}&page={{ list_collections.previous_page_number }}">
+                            назад
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="disabled">
+                    <a>
+                        страница {{ list_collections.number }} из {{ list_collections.paginator.num_pages }}
+                    </a>
+                </li>
+                {% if list_collections.has_next %}
+                    <li>
+                        <a href="{{ response_for_web.response }}&page={{ list_collections.next_page_number }}">
+                            вперед
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

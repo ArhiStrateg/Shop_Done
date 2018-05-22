@@ -1,0 +1,73 @@
+
+        <div class="parent">
+            <div class="child" style="box-shadow: 0 0 5px rgba(0,0,0,0.2); margin-bottom: 10px;">
+                <div div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom: 10px;">
+
+                        <form style="margin-bottom: 0px;" action="{% url 'collection_singl' result_only_c.name_collection.id_patch %}">
+                            <button class="knopka" type="submit"
+                               style="padding-left: 5px;padding-top: 5px;padding-right: 5px;color: #999999;padding-bottom: 5px;
+                               border-top-width: 0px;border-left-width: 0px;border-right-width: 0px;border-bottom-width: 0px; margin-bottom: -9px;">
+                                <div style="background-image: url(/media/logo/bg_r.jpg); background-position: left bottom; background-repeat: repeat-y; padding-left: 0px;padding-right: 0px;">
+                                    <div class="block_main_collection">
+
+                                        <img src="{{ result_only_c.image_collection.url }}" class="img-responsive">
+
+                                        {% if result_only_c.name_collection.name_collection_nhs != None %}
+                                            <span style="font-size: 80%;position: absolute; left: 7%; top: 3%; background: orange; color: black;
+                                            font-weight: 600; margin-left: 5px; padding-bottom: 3px; padding-right: 8px;
+                                            padding-top: 3px; padding-left: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+
+                                                {{ result_only_c.name_collection.name_collection_nhs.name_collection_nhs }}
+
+                                            </span>
+                                        {% endif %}
+                                        <h5 class="text-center" style="line-height: 1.5; margin-bottom: 0px;">
+                                            <span>
+
+                                                <div style="display: flex; justify-content: center; align-items: center; min-height: 40px;">
+                                                    <strong><b>{{ result_only_c.name_collection.name_collection }}</b></strong>
+                                                </div>
+                                            </span>
+                                        </h5>
+
+                                        <h5 class="text-center" style="margin-top: 0px; margin-bottom: 0px;">
+
+                                            <div class="visible-lg">
+                                                <div class="for_collection_products_item_bloc" style="display: flex; justify-content: center; align-items: center; margin-bottom: 0px; line-height: 1.5; min-height: 190px;">
+                                                    <span>{{ result_only_c.name_collection.description_collection_mini | truncatechars_html:122 | safe }}</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="visible-md">
+                                                <div class="for_collection_products_item_bloc" style="display: flex; justify-content: center; align-items: center; margin-bottom: 0px; line-height: 1.5; min-height: 147px;">
+                                                    <span>{{ result_only_c.name_collection.description_collection_mini | truncatechars_html:122 | safe }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="visible-sm">
+                                                <div class="for_collection_products_item_bloc" style="display: flex; justify-content: center; align-items: center; margin-bottom: 0px; line-height: 1.5; min-height: 160px;">
+                                                    <span>{{ result_only_c.name_collection.description_collection_mini | truncatechars_html:122 | safe }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="visible-xs">
+                                                <div class="for_collection_products_item_bloc" style="display: flex; justify-content: center; align-items: center; margin-bottom: 0px; line-height: 1.5;">
+                                                    <span>{{ result_only_c.name_collection.description_collection_mini | truncatechars_html:122 | safe }}</span>
+                                                </div>
+                                            </div>
+
+                                        </h5>
+
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+

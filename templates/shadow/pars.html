@@ -1,0 +1,278 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+    {% if show == True %}
+        <div class="row" style="margin-left: 0px; margin-right: 0px;">
+            <form method="post">{% csrf_token %}
+                <div class="col-lg-12" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+
+                    <h5 align="center" style="font-size: 150%"><b>Обработка изображений</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <div class="add-to-card-btn text-center">
+                        <div class="col-lg-12" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                            <p>
+                                <input class="btn btn-primary btn-xs btn-block" type="submit" name="Image_resize" value="Подготовка изображений для показа мини">
+                            </p>
+
+                        </div>
+                    </div>
+                    <h5 align="center" style="font-size: 150%"><b>Создание для коллекций первичных путей</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <div class="add-to-card-btn text-center">
+                        <div class="col-lg-12" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                            <p>
+                                <input class="btn btn-primary btn-xs btn-block" type="submit" name="Id_patch" value="Начало обработки существующих коллекций">
+                            </p>
+
+                        </div>
+                    </div>
+
+                            <h5 align="center" style="font-size: 150%"><b>Внесение информации по фильтам поиска</b></h5>
+                            <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                            <div class="add-to-card-btn text-center">
+                                <div class="col-lg-12" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Colour" value="Старт настройки ЦВЕТА в фильтре">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Floor" value="Старт настройки ПОЛ/СТЕНА/УНИВЕРСАЛЬНАЯ в фильтре">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Style" value="Старт настройки СТИЛЯ в фильтре">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Facturer" value="Старт настройки ФАКТУРЫ в фильтре">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Texturer" value="Старт настройки ТЕКСТУРЫ в фильтре">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Material" value="Старт настройки МАТЕРИАЛА в фильтре">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="Used" value="Старт настройки ПРИМЕНЕНИЯ в фильтре">
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <h5 align="center" style="font-size: 150%"><b>Внесение информации по коллекциям</b></h5>
+                            <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                            <div class="add-to-card-btn text-center">
+                                <div class="col-lg-4" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MARVEL STONE" value="Старт MARVEL STONE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ARKSHADE" value="Старт ARKSHADE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="NID" value="Старт NID">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MEK" value="Старт MEK">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MARVEL PRO" value="Старт MARVEL PRO">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MARVEL" value="Старт MARVEL">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="KONE" value="Старт KONE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="3D WALL DESIGN" value="Старт 3D WALL DESIGN">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ROOM" value="Старт ROOM">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="DWELL" value="Старт DWELL">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MARVEL GEMS" value="Старт MARVEL GEMS">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="BRILLIANT" value="Старт BRILLIANT">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="BRAVE" value="Старт BRAVE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="AXI" value="Старт AXI">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ETIC PRO" value="Старт ETIC PRO">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MARVEL XL" value="Старт MARVEL XL">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MAGNIFIQUE" value="Старт MAGNIFIQUE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ETIC" value="Старт ETIC">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ARTY" value="Старт ARTY">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="BRICK ATELIER" value="Старт BRICK ATELIER">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="EWALL" value="Старт EWALL">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="BORD" value="Старт BORD">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="STYLE" value="Старт STYLE">
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-4" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MARK WALL&FLOOR DESIGN" value="Старт MARK WALL&FLOOR DESIGN">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="TREK" value="Старт TREK">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="DOLMEN" value="Старт DOLMEN">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="SUNROCK" value="Старт SUNROCK">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="SEASTONE" value="Старт SEASTONE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ADVANCE" value="Старт ADVANCE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="DOGA" value="Старт DOGA">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="EVER" value="Старт EVER">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="EXTEND" value="Старт EXTEND">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="GREENCOLORS" value="Старт GREENCOLORS">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="TRUST" value="Старт TRUST">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="STUDIO" value="Старт STUDIO">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="STAY" value="Старт STAY">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="FIBRA" value="Старт FIBRA">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="VIVACE" value="Старт VIVACE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="CHROMA" value="Старт CHROMA">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="EVOLVE" value="Старт EVOLVE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="RADIANCE" value="Старт RADIANCE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="ADORE" value="Старт ADORE">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="GLOW" value="Старт GLOW">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="INTENSITY" value="Старт INTENSITY">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="SUBLIME" value="Старт SUBLIME">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="MILESTONE" value="Старт MILESTONE">
+                                    </p>
+
+                                 </div>
+
+                                <div class="col-lg-4" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="SPARK" value="Старт SPARK">
+                                    </p>
+
+                                   <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="VIEW" value="Старт VIEW">
+                                    </p>
+
+                                    <p>
+                                        <input class="btn btn-primary btn-xs btn-block" type="submit" name="GIOIA" value="Старт GIOIA">
+                                    </p>
+
+
+
+                                </div>
+
+                            </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    {% endif %}
+{% endblock content %}

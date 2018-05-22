@@ -1,0 +1,74 @@
+
+<div class="col-lg-3 product_item">
+    <div class="parent">
+
+        <div class="child" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <div>
+
+                <a href="{% url 'manufacturer_singl_ukr' manufacturer_for_web.id %}">
+                    <img src="{{ manufacturer_for_web.image_logo_manufacturer.url }}" class="img-responsive img-center" width="100%">
+                </a>
+
+                <div>
+                    <a href="{% url 'manufacturer_singl_ukr' manufacturer_for_web.id %}">
+                        <h5 class="text-center" style="font-size: 130%">
+                            <span>
+                                <strong>{{ manufacturer_for_web.name_manufacturer }}</strong>
+                            </span>
+                        </h5>
+                    </a>
+
+                    <ul class="nav nav-pills">
+                        <li class="dropdown btn-lg btn-block" style="background-color: orange; padding: 0px 0px">
+
+                            <a class="dropdown-toggle" data-toggle="dropdown" align="center">
+                                <span style="color: #000">
+                                        Колекції
+                                        (
+                                        {% for dictin_web in dictin_out %}
+                                            {% if dictin_web.manufacturer_id == manufacturer_for_web.id %}
+                                                {{ dictin_web.len_collecti }}
+                                            {% endif %}
+                                        {% endfor %}
+                                        )
+                                    <b class="caret"></b>
+                                </span>
+                            </a>
+
+                            <ul id="menu1" class="dropdown-menu" style="border-radius: 0px; width: 100%">
+                                {% for dictin_web in dictin_out %}
+                                    {% if dictin_web.manufacturer_id == manufacturer_for_web.id %}
+                                        {% for dictin_web_c in dictin_web.collection %}
+                                        <li>
+                                            <a name="menu_low" href="{% url 'collection_singl_ukr' dictin_web_c.name_collection.id %}">
+                                                {{ dictin_web_c.name_collection }}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+
+                        <div class="text-center" style="padding-top: 10px">
+                            {{ manufacturer_for_web.manufacturer_country.name_manufacturer_country_ukr }}
+                        </div>
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                        <a href="{% url 'manufacturer_singl_ukr' manufacturer_for_web.id %}">
+                            <div style="padding-top: 0px">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px;">Детальніше</button>
+                            </div>
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

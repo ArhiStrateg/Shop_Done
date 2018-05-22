@@ -1,0 +1,187 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Заказы и проекты</a></li>
+            <li><a href="{% url 'shadow_projects'%}"><i class=""></i> Проекты и спецификации</a></li>
+            <li class="active"><span><i class=""></i> Информация по пользователю</span></li>
+        </ol>
+    </div>
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика посещений пользователя</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество посещений страниц поизводителей</b> - {{ statistic_all_manafactur.count }}<br>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество посещений страниц коллекций</b> - {{ statistic_all_collection.count }}<br>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество посещений страниц продуктов</b> - {{ statistic_all_product.count }}<br>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 align="center" style="font-size: 120%">
+                        <b>Хронология посещения :</b><br><br>
+                    </h5>
+
+                    <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                        {% for hronos in list_time %}
+                            {% if hronos.type_page == "manafacturer" %}
+                                <li style="font-size: 80%">
+                                    <a><b>
+                                        <font color="#840000" style="font-size: 100%">
+                                            {{ hronos.page }}<br>
+                                        </font>
+                                    </b></a>
+                                    <span class="count" style="font-size: 100%">(время присутствия - {{ hronos.delta }})</span>
+                                </li>
+                            {% elif hronos.type_page == "collections" %}
+                                <li style="font-size: 80%">
+                                    <a><b>
+                                        <font color="#155800" style="font-size: 100%">
+                                            {{ hronos.page }}<br>
+                                        </font>
+                                    </b></a>
+                                    <span class="count" style="font-size: 100%">(время присутствия - {{ hronos.delta }})</span>
+                                </li>
+                            {% elif hronos.type_page == "product" %}
+                                <li style="font-size: 80%">
+                                    <a><b>
+                                        <font color="#967700" style="font-size: 100%">
+                                            {{ hronos.page }}<br>
+                                        </font>
+                                    </b></a>
+                                    <span class="count" style="font-size: 100%">(время присутствия - {{ hronos.delta }})</span>
+                                </li>
+                            {% elif hronos.type_page == "site" %}
+                                <li style="font-size: 80%">
+                                    <a><b>
+                                        <font style="font-size: 100%">
+                                            {{ hronos.page }}<br>
+                                        </font>
+                                    </b></a>
+                                    <span class="count" style="font-size: 100%">(время присутствия - {{ hronos.delta }})</span>
+                                </li>
+                            {% else %}
+                                <li style="font-size: 80%">
+                                    <a><b>
+
+                                            {{ hronos.page }}<br>
+
+                                    </b></a>
+                                    <span class="count" style="font-size: 100%">(время присутствия - {{ hronos.delta }})</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <ol>
+                        &nbsp;
+                    </ol>
+                </ol>
+            </ol>
+        </div>
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <div>
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+
+                    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                        <h5 align="center" style="font-size: 150%"><b>Общее количество посещений страниц коллекций</b></h5>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                        <h5 align="center" style="font-size: 100%">
+                            <b>Общее количество посещений страниц коллекций </b><br>
+                        </h5>
+                        <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                            {% for result_in_collection_web in result_in_collection %}
+                                <li style="font-size: 80%">
+                                    <a align="center"><b>
+                                        {{ result_in_collection_web.name }} ({{ result_in_collection_web.prosent }}%)&nbsp;/&nbsp;
+                                        {{ result_in_collection_web.manafacturer }}<br>
+                                        (время присутствия - {{ result_in_collection_web.time_summa}})&nbsp;/&nbsp;посещений - {{ result_in_collection_web.povtor }}
+                                    </b></a>
+                                    <span class="index" style="width:{{ result_in_collection_web.prosent }}%">({{ result_in_collection_web.prosent }}%)</span>
+                                </li>
+                            {% endfor %}
+                        </div>
+                        <br>
+                        <div>
+                            &nbsp;
+                        </div>
+                    </ol>
+                    <ol>
+                        &nbsp;
+                    </ol>
+                    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                        <h5 align="center" style="font-size: 150%"><b>Общее количество посещений страниц производителей</b></h5>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                        <h5 align="center" style="font-size: 100%">
+                            <b>Общее количество посещений страниц производителей</b><br>
+                        </h5>
+
+                        <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                            {% for result_in_manafactur_web in result_in_manafactur %}
+                                <li style="font-size: 80%">
+                                    <a align="center"><b>
+                                        {{ result_in_manafactur_web.name }}&nbsp;({{ result_in_manafactur_web.prosent }}%)<br>
+                                        (время присутствия - {{ result_in_manafactur_web.time_summa}})&nbsp;/&nbsp;посещений - {{ result_in_manafactur_web.povtor }}
+                                    </b></a>
+                                    <span class="index" style="width: {{ result_in_manafactur_web.prosent }}%">({{ result_in_manafactur_web.prosent }}%)</span>
+                                </li>
+                            {% endfor %}
+                        </div>
+                        <br>
+                        <div>
+                            &nbsp;
+                        </div>
+                    </ol>
+                    <ol>
+                        &nbsp;
+                    </ol>
+                    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                        <h5 align="center" style="font-size: 150%"><b>Общее количество посещений страниц продуктов</b></h5>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                        <h5 align="center" style="font-size: 100%">
+                            <b>Общее количество посещений страниц продуктов</b><br>
+                        </h5>
+
+                        <div class="chartlist" style="-webkit-padding-start: 0px; width: 100%">
+                            {% for result_in_product_web in result_in_product %}
+                                <li style="font-size: 80%">
+                                    <a align="center"><b>{{ result_in_product_web.name }} ({{ result_in_product_web.prosent }}%)&nbsp;/&nbsp;
+                                        {{ result_in_product_web.collection }}&nbsp;/&nbsp;{{ result_in_product_web.manafacturer }}<br>
+                                        (время присутствия - {{ result_in_product_web.time_summa}})&nbsp;/&nbsp;посещений - {{ result_in_product_web.povtor }}
+                                    </b></a>
+
+                                    <span class="index" style="width: {{ result_in_product_web.prosent }}%">({{ result_in_product_web.prosent }}%)</span>
+                                </li>
+                            {% endfor %}
+
+                        </div>
+                        <br>
+                        <div>
+                            &nbsp;
+                        </div>
+                    </ol>
+
+                </ol>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

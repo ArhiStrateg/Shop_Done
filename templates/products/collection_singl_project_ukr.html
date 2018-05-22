@@ -1,0 +1,62 @@
+{% extends "base_ukr.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ collection_singl_web.keyword }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ collection_singl_web.description }}">
+{% endblock meta_description %}
+
+{% block title %}
+    {{ collection_singl_web.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ collection_singl_web.title }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ collection_singl_web.title }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ collection_singl_web.description }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main_ukr'%}"><i class=""></i> Главная</a></li>
+        <li><a href="{% url 'manufacturer_ukr'%}"><i class=""></i> Каталог</a></li>
+        <li><a href="{% url 'manufacturer_singl_ukr' collection_singl_web.manufacturer_collection.id%}"><i class=""></i> {{ collection_singl_web.manufacturer_collection.name_manufacturer }}</a></li>
+        <li><a href="{% url 'collection_singl_ukr' collection_singl_web.id%}"><i class=""></i> {{ collection_singl_web.name_collection }}</a></li>
+        <li class="active"><span><i class=""></i> Відправка проекту на розгляд</span></li>
+        <!--<li class="active"><span><i class=""></i> {{ collection_singl_web.name_collection }}</span></li>-->
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <div class="row">
+
+        <div align="center" class="col-lg-12" style="padding-left: 40px; padding-top: 20px">
+            <h5 style="font-size: 200%;"><b>Дякуємо Вам за вибір нашого інтернет-магазину</b></h5>
+            <h5 style="font-size: 150%;">Ваш проект відправлений на розгляд</h5>
+            <h5 style="font-size: 150%;">Наш менеджер в найближчий час з Вами зв'яжеться</h5>
+        </div>
+        <div align="center" class="col-lg-6 col-lg-offset-3" style="padding-left: 40px; padding-top: 20px">
+            <a href="{% url 'main' %}">
+                <button  class="btn btn-lg btn-block btn-success">Перейти на головну сторінку</button>
+            </a>
+        </div>
+        <div align="center" class="col-lg-6 col-lg-offset-3" style="padding-left: 40px; padding-top: 20px">
+            <a href="{% url 'collection_singl' collection_singl_web.id %}">
+                <button type="submit" class="btn btn-lg btn-block btn-success">Продовжити покупки (Повернутися на сторінку {{ collection_singl_web.name_collection }}) </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

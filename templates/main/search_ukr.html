@@ -1,0 +1,64 @@
+{% extends "base_ukr.html" %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main_ukr'%}"><i class=""></i> Головна</a></li>
+        <li class="active"><span><i class=""></i> Пошук</span></li>
+    </ol>
+</div>
+
+<br>
+<div style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <h1>Результати пошуку</h1>
+        <br>
+        <h5>{{ send }} - <b>"{{ keyword }}"</b></h5>
+    </ol>
+
+    <ol>
+        &nbsp;
+    </ol>
+
+</div>
+
+<div style="padding-right: 40px; padding-left: 40px">
+    {% if list_collections != Null %}
+            {% for result_only_c in list_collections %}
+                    {% include 'products/collection_for_search_low_ukr.html' %}
+            {% endfor %}
+    {% endif %}
+</div>
+
+<!--Пагинация страницы - начало-->
+
+<div class="section" align="center">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if list_collections.has_previous %}
+                        <a href="{{ response_for_web.response }}&page={{ list_collections.previous_page_number }}">назад</a>
+                    {% endif %}
+
+                    <span class="current">
+                        сторінка {{ list_collections.number }} з {{ list_collections.paginator.num_pages }}
+                    </span>
+
+                    {% if list_collections.has_next %}
+                        <a href="{{ response_for_web.response }}&page={{ list_collections.next_page_number }}">вперед</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Пагинация страницы - конец-->
+
+
+{% endblock content %}

@@ -1,0 +1,94 @@
+
+    <div style="background: #f3f3f3; border-top: 1px solid #e7e7e7; font-size: 13px; padding: 30px 30px; margin-top: 20px">
+        <div class="row">
+            <div class="col-lg-9">
+                <div>
+                    {% for footer in all_info_footer %}
+                        <p>{{ footer.text | safe }}</p>
+                    {% endfor %}
+
+                    {% if show_enter_shadow == True %}
+                        <p>
+                            <a href="#login_form" style="color: #000000;">©</a>
+                            2017 Компания «CERAMA CASA». Все права защищены.
+                        </p>
+                        <a href="#x" class="overlay_login" id="login_form"></a>
+                        <div class="popup_login">
+                            <div class="row" style="padding-top: 20px; padding-left: 20px; border-right-width: 20px;
+                            padding-right: 20px; padding-bottom: 20px; margin-left: 0; margin-right: 0;">
+                                <h5 align="center" style="font-size: 150%"><b>Добро пожаловать!</b></h5>
+                                <p align="center" style="font-size: 120%">Введите ваш логин и пароль</p>
+                                <form method="post">{% csrf_token %}
+
+                                    <div>
+                                        <label>Логин: </label>
+                                            {{ data.login }}
+                                    </div>
+
+                                    <div>
+                                        <label>Пароль: </label>
+                                            {{ data.password }}
+                                    </div>
+
+                                    <div style="width: 100%">
+                                        <p><input class="btn btn-lg btn-block btn-success" type="submit" name="enter" value="Войти"></p>
+                                    </div>
+                                </form>
+                                <a class="close_login" href="#x"></a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p>
+                            @2017 Компания «CERAMA CASA». Все права защищены.
+                        </p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="callbutton" style="opacity: 0.80; filter: alpha(Opacity=80); padding-bottom: 1px; z-index: 100;">
+        <a href="#phone_form"
+           style="background-image: linear-gradient(to bottom, #ffffff, #F5F5F5); padding-left: 0px;padding-right: 0px; padding-top: 0px; padding-bottom: 0px;">
+            <img src="/media/all/phone.jpg" style="width: 100%;" alt="Contacts">
+            <span>
+                <b>Заказать обратный звонок</b>
+            </span>
+        </a>
+    </div>
+
+    <a href="#x" class="overlay_login" id="phone_form"></a>
+    <div class="popup_login">
+        <div class="row" style="padding-top: 20px; padding-left: 20px; border-right-width: 20px;
+        padding-right: 20px; padding-bottom: 20px; margin-left: 0; margin-right: 0;">
+            <h5 align="center" style="font-size: 150%">
+                <b>
+                    Благодарим за проявленный<br>
+                    интерес к нашей компании<br>
+                </b>
+            </h5>
+            <p align="center" style="font-size: 120%">
+                Оставьте свои контакные данные
+            </p>
+            <form action="{% url 'phone_adding' %}">{% csrf_token %}
+
+                <span class="form-error">{{ form.name.errors }}</span>
+                <input type="text" name="name" id="form_for_save_phone_name" required="required" value="{{ request.POST.name }}" class="form" placeholder="Введите ФИО ..."
+                       style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px;
+                       margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;" />
+
+                <span class="form-error">{{ form.phone.errors }}</span>
+                <input type="text" name="phone" id="form_for_save_phone_phone" required="required" value="{{ request.POST.phone }}" class="form" placeholder="Введите контактный телефон ..."
+                       style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px;
+                       margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;" />
+
+                <div style="width: 100%; padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">
+                    <p><input class="btn btn-lg btn-block btn-success" type="submit" name="send_phone" value="Отправить данные и вернуться на главную"></p>
+                </div>
+            </form>
+            <a class="close_login" href="#x"></a>
+        </div>
+    </div>
+
+

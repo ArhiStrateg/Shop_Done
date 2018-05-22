@@ -1,0 +1,98 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li class="active"><span><i class=""></i> Заказы и проекты</span></li>
+        </ol>
+    </div>
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Заказы на покупку</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 120%">Общее количество зарегистрированных заказов - {{ orders_all.count }}</h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    {% for status in status_all %}
+                        <h5 style="font-size: 100%" align="left">
+                            <span><b>Наименование статуса</b> - {{ status.name_status }}</span>
+                        </h5>
+                        {% for result in sum_result %}
+                            {% if result.status_id == status.id %}
+                                <h5 style="font-size: 100%" align="left">
+                                    <span><b>Колличество ордеров данного статуса</b> - {{ result.leni }}</span>
+                                </h5>
+
+                                <h5 style="font-size: 100%" align="left">
+                                    <span><b>ID ордеров</b> -
+                                        {% for order in result.orders %}
+                                            {{ order }}
+                                        {% endfor %}
+                                    </span>
+                                </h5>
+                            {% endif %}
+                        {% endfor %}
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                    {% endfor %}
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'shadow_orders' %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                            </a>
+                        </p>
+                    </div>
+
+                </ol>
+            </ol>
+        </div>
+
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Проекты и спецификации</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 120%">Общее количество зарегистрированных проектов - {{ progects_all.count }}</h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    {% for status in status_all %}
+                        <h5 style="font-size: 100%" align="left">
+                            <span><b>Наименование статуса</b> - {{ status.name_status }}</span>
+                        </h5>
+                        {% for result in sum_resul %}
+                            {% if result.project_id == status.id %}
+                                <h5 style="font-size: 100%" align="left">
+                                    <span><b>Колличество ордеров данного статуса</b> - {{ result.leni }}</span>
+                                </h5>
+
+                                <h5 style="font-size: 100%" align="left">
+                                    <span><b>ID проектов и спецификаций</b> -
+                                        {% for order in result.project %}
+                                            {{ order }}
+                                        {% endfor %}
+                                    </span>
+                                </h5>
+                            {% endif %}
+                        {% endfor %}
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                    {% endfor %}
+
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'shadow_projects' %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                            </a>
+                        </p>
+                    </div>
+                </ol>
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

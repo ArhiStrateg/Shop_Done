@@ -1,0 +1,160 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li><a href="{% url 'shadow_projects'%}"><i class=""></i> Проекты и спецификации</a></li>
+            <li class="active"><span><i class=""></i> Проект / спецификация</span></li>
+        </ol>
+    </div>
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Проект / спецификация (ID - {{ project_singl_one.id }})</b><br>
+                        <a href="{% url 'session_key_eye' project_singl_one.session_key %}" target="_blank">
+                            <span style="font-size: 60%">(подробнее о пользователе)</span>
+                        </a>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <h5 style="font-size: 100%" align="left">
+                        <span><b>Cтатус</b> - {{ project_singl_one.status.name_status }}</span>
+                    </h5>
+                    <h5 style="font-size: 100%" align="left">
+                        <span><b>ФИО заказчика</b> - {{ project_singl_one.customer_name }}</span>
+                    </h5>
+                    <h5 style="font-size: 100%" align="left">
+                        <span><b>Е-маил заказчика</b> - {{ project_singl_one.customer_email }}</span>
+                    </h5>
+
+                    <h5 style="font-size: 100%" align="left">
+                        <span><b>Телефон заказчика</b> - {{ project_singl_one.customer_phone }}</span>
+                    </h5>
+
+                    <h5 style="font-size: 100%" align="left">
+                        <span><b>Адес заказчика</b> - {{ project_singl_one.customer_address }}</span>
+                    </h5>
+
+                    <h5 style="font-size: 100%" align="left">
+                        <span><b>Комментарий к заказу</b> - {{ project_singl_one.comments }}</span>
+                    </h5>
+
+                    <h5 style="font-size: 100%" align="left">
+                        <span>
+                            <b>Приложенная спецификация</b> - {{ project_singl_one.project }}<br>
+                            <a href="{% url 'main'%}media/{{ project_singl_one.project }}" target="_blank" download>Скачать прикрепленный файл</a>
+                        </span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px">
+                    <h5 style="font-size: 90%" align="left">
+                        <span>Дата внесения последнего комментария  - {{ data_max.created }}</span> <br>
+                        <span>
+                            Автор последнего комментария -
+                            <b>{{ data_max.autor.surname }} {{ data_max.autor.name }} {{ data_max.autor.last_name }}</b> ({{ data_max.autor.dolgnoct.dolgnost_nasvanie }})
+                        </span>
+
+                    </h5>
+                 </ol>
+
+                <ol>
+                    &nbsp;
+                </ol>
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <div style="padding-right: 40px; padding-left: 40px; padding-top: 0px">
+                        <h5 align="center" style="font-size: 150%"><b>Оставить комментарий по проекту</b></h5>
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                        {% include 'shadow/swadow_find_project.html' %}
+                    </div>
+
+                </ol>
+            </ol>
+        </div>
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <div class="section">
+                        <div class="row">
+
+                            <h5 align="center" style="font-size: 150%"><b>Изменение статуса</b></h5>
+                            <form method="post">{% csrf_token %}
+
+                                <div class="col-lg-6">
+
+                                    <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                            style="border-radius: 0px; width: 100%; padding-top: 0px; padding-bottom: 0px; font-size: 14px;
+                                            margin-bottom: 0px; margin-top: 0px"
+                                            data-toggle="dropdown">
+                                        Выберите статус
+                                        <span class="caret"></span>
+                                    </button>
+
+                                    <ul class="dropdown-menu" style="width: 100%">
+                                        {% for status_single_web in all_status %}
+                                            <li><a class="small" data-value="{{ status_single_web.id }}" name="search_hight" value={{ status_single_web.id }} tabIndex="-1"><input name="status" value={{ status_single_web.id }} type="radio"/>&nbsp;{{ status_single_web.name_status }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <p>
+                                        <input class="btn btn-lg btn-block btn-success" style="padding-top: 1px; padding-bottom: 1px; font-size: 14px;
+                                            margin-bottom: 0px; margin-top: 0px"
+                                            type="submit" name="save" value="Сохранить изменение">
+                                    </p>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </ol>
+
+                <ol>
+                    &nbsp;
+                </ol>
+
+
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <h5 align="center" style="font-size: 150%"><b>Список комментариев</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    {% for text in text_send %}
+                        <h5 style="font-size: 80%; line-height: 1.5" align="left">
+                            <span>Дата комментария - {{ text.created }}</span><br>
+                            <span>
+                                Автор комментария -
+                                <b>{{ text.autor.surname }} {{ text.autor.name }} {{ text.autor.last_name }}</b> ({{ data_max.autor.dolgnoct.dolgnost_nasvanie }})
+                            </span><br>
+                        </h5>
+
+
+                        <h5 style="font-size: 100%; line-height: 1.5" align="center">
+                            <span><b>Текст комментария</b></span><br>
+                        </h5>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                            <div style="white-space: normal">
+                                {{ text.text_send }}
+                            </div>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+
+                        <h5 style="font-size: 80%; line-height: 1.5" align="left">
+
+                            <span>Прикрепленный файл - {{ text.project_img }}</span><br>
+                            <a href="{% url 'main'%}media/{{ text.project_img }}" target="_blank" download>Скачать прикрепленный файл</a>
+
+                        </h5>
+
+                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    {% endfor %}
+                </ol>
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

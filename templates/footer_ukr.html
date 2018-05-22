@@ -1,0 +1,42 @@
+<div class="section" style="background: #f3f3f3; border-top: 1px solid #e7e7e7; font-size: 13px; padding: 30px 30px; margin-top: 20px">
+    <div class="row">
+        <div class="col-lg-9">
+            <div >
+                {% for footer in all_info_footer %}
+                    {{ footer.text_ukr | safe }}
+                {% endfor %}
+
+                {if show_enter_shadow == True}
+                    <a href="#login_form">©</a>
+                    2017 Компанія «Керамотека». Всі права захищені.
+                    <a href="#x" class="overlay_login" id="login_form"></a>
+                    <div class="popup_login">
+                        <div class="row" style="padding-top: 20px; padding-left: 20px; border-right-width: 20px;
+                        padding-right: 20px; padding-bottom: 20px; margin-left: 0; margin-right: 0;">
+                            <h5 align="center" style="font-size: 150%"><b>Добро пожаловать!</b></h5>
+                            <p align="center" style="font-size: 120%">Введите ваш логин и пароль</p>
+                            <form method="post">{% csrf_token %}
+
+                                <div>
+                                    <label>Логин: </label>
+                                        {{ data.login }}
+                                </div>
+
+                                <div>
+                                    <label>Пароль: </label>
+                                        {{ data.password }}
+                                </div>
+
+                                <div style="width: 100%">
+                                    <p><input class="btn btn-lg btn-block btn-success" type="submit" name="enter" value="Войти"></p>
+                                </div>
+                            </form>
+                            <a class="close_login" href="{% url 'main' %}"></a>
+                        </div>
+                    </div>
+                {else}
+                    @2017 Компанія «Керамотека». Всі права захищені.
+            </div>
+        </div>
+    </div>
+</div>

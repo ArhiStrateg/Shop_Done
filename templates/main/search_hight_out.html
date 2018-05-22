@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for collect_only in collect %}
+{{ collect_only.id }}
+{% endfor %}
+
+{% endblock content %}

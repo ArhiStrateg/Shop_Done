@@ -1,0 +1,423 @@
+{% extends "base_ukr.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ project_info.keyword_ukr }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ project_info.description_ukr }}">
+{% endblock meta_description %}
+
+{% block title %}
+    {{ project_info.title_ukr }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ project_info.title_ukr }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ project_info.title_ukr }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ project_info.description_ukr }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main_ukr'%}"><i class=""></i> Головна</a></li>
+        <li class="active"><span><i class=""></i> Проектні матеріали</span></li>
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <table>
+            <td>
+                <div class="col-lg-12" style="font-size: 88%">
+                    <h5 style="font-size: 120%; margin-left: 5px"><b>Телефони:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                        <h5 style="font-size: 90%">
+                            {% for phone in all_info_project_material %}
+                            <table>
+                                <td>
+                                    <tr><b>{{ phone.test_phone_1_ukr }}: </b></tr>
+                                    <tr>{{ phone.phone_1_ukr }}</tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ phone.test_phone_2_ukr }}: </b></tr>
+                                    <tr>{{ phone.phone_2_ukr }}</tr>
+                                </td>
+                            </table>
+                            {% endfor %}
+                        </h5>
+
+                    <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Адреса:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                         <h5 style="font-size: 90%">
+                            {% for adres in all_info_project_material %}
+                            <table>
+                                <td>
+                                    <tr><b>{{ adres.adress_adress_ukr }}</b></tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ adres.adress_local_ukr }}</b></tr>
+                                </td>
+                            </table>
+                            {% endfor %}
+                        </h5>
+
+
+                    <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Час роботи:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                    <h5 style="font-size: 90%">
+                        {% for time in all_info_project_material %}
+                            <table>
+                                <td>
+                                    <tr><b>{{ time.time_b_ukr }}</b></tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ time.time_v_ukr }}</b></tr>
+                                </td>
+                            </table>
+                        {% endfor %}
+                    </h5>
+                </div>
+
+                <tr>
+                    <div class="col-lg-3" style="padding-left: 40px">
+                        <h1>Проектні матеріали</h1>
+                    </div>
+
+                    <div class="col-lg-6" style="padding-top: 20px; margin-bottom: 20px; line-height: 1.5">
+                        {% for info in all_info_project_material %}
+                            {{ info.text_for_project_ukr | safe }}
+                        {% endfor %}
+                    </div>
+                </tr>
+
+
+            </td>
+        </table>
+    </div>
+</div>
+
+
+<form method="GET">
+
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2><b style="padding-left: 15px">Швидкий пошук:</b></h2>
+                </div>
+
+
+
+<!--Параметры поиска по ПРОИЗВАДИТЕЛЮ - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Виберіть виробника
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for manafacturer_search_hight_web in manafacturer_search_hight %}
+                                <li><a class="small" data-value="{{ manafacturer_search_hight_web.id }}" name="search_hight"
+                                       value={{ manafacturer_search_hight_web.id }} tabIndex="-1">
+                                    <input name="manafacturer" value={{ manafacturer_search_hight_web.id }} type="checkbox"/>
+                                    &nbsp;{{ manafacturer_search_hight_web.name_manufacturer }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+<!--Параметры поиска по ПРОИЗВАДИТЕЛЮ - начало -->
+
+
+<!--Параметры поиска по СТРАНЕ - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Виберіть країну
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for country_web in country %}
+                                <li><a class="small" data-value="{{ country_web.id }}" name="search_hight"
+                                       value={{ country_web.id }} tabIndex="-1">
+                                    <input name="country" value={{ country_web.id }} type="checkbox"/>
+                                    &nbsp;{{ country_web.name_manufacturer_country_ukr }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+<!--Параметры поиска по СТРАНЕ - конец -->
+
+<!--Параметры поиска по НАЛИЧИЮ - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Виберіть наявність
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for availability_s_web in availability_s %}
+                                <li><a class="small" data-value="{{ availability_s_web.id }}" name="search_hight"
+                                       value={{ availability_s_web.id }} tabIndex="-1">
+                                    <input name="availability" value={{ availability_s_web.id }} type="checkbox"/>
+                                    &nbsp;{{ availability_s_web.name_availability_ukr }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+<!--Параметры поиска по НАЛИЧИЮ - конец -->
+
+<!--Параметры поиска по ЦЕНОВОМУ ДИАППАЗОНУ - начало -->
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Виберіть ціновий діапазон
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for price_web in price %}
+                                <li><a class="small" data-value="{{ price_web.id }}" name="search_hight"
+                                       value={{ price_web.id }} tabIndex="-1">
+                                    <input name="price" value={{ price_web.id }} type="checkbox"/>
+                                    &nbsp;{{ price_web.name_price_group }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+<!--Параметры поиска по ЦЕНОВОМУ ДИАППАЗОНУ - конец -->
+
+<!--Параметры поиска по ПРИМЕНЕНИЮ - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Оберіть застосування
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="bathrooms" name="search_hight" value=bathrooms tabIndex="-1">
+                                <input name="application" value=bathrooms type="checkbox"/>
+                                &nbsp;Для ванних кімнат
+                            </a></li>
+                            <li><a class="small" data-value="floor" name="search_hight" value=floor tabIndex="-1">
+                                <input name="application" value=floor type="checkbox"/>
+                                &nbsp;Для кухні / Плитка для підлоги
+                            </a></li>
+                            <li><a class="small" data-value="apron" name="search_hight" value=apron tabIndex="-1">
+                                <input name="application" value=apron type="checkbox"/>
+                                &nbsp;Для кухні / Фартух
+                            </a></li>
+                            <li><a class="small" data-value="outdoor" name="search_hight" value=outdoor tabIndex="-1">
+                                <input name="application" value=outdoor type="checkbox"/>
+                                &nbsp;Для вуличного застосування
+                            </a></li>
+                            <li><a class="small" data-value="residential" name="search_hight" value=residential tabIndex="-1">
+                                <input name="application" value=residential type="checkbox"/>
+                                &nbsp;Житловий інтер'єр
+                            </a></li>
+                            <li><a class="small" data-value="projects" name="search_hight" value=projects tabIndex="-1">
+                                <input name="application" value=projects type="checkbox"/>
+                                &nbsp;Громадські інтер'єри
+                            </a></li>
+                        </ul>
+                    </div>
+<!--Параметры поиска по ЦЕНОВОМУ ДИАППАЗОНУ - конец -->
+
+<!--Параметры поиска по ТИПУ МАТЕРИАЛА - начало -->
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                margin-top: 10px"
+                                data-toggle="dropdown">
+                            Виберіть тип матеріалу
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="ceramic" name="search_hight" value=ceramic tabIndex="-1">
+                                <input name="type_material" value=ceramic type="checkbox"/>
+                                &nbsp;Керамічна плитка
+                            </a></li>
+                            <li><a class="small" data-value="porcelain" name="search_hight" value=porcelain tabIndex="-1">
+                                <input name="type_material" value=porcelain type="checkbox"/>
+                                &nbsp;Керамограніт
+                            </a></li>
+                        </ul>
+                    </div>
+<!--Параметры поиска по ТИПУ МАТЕРИАЛА - конец -->
+
+                <div class="col-lg-9 col-lg-offset-3" style="margin-top: 10px">
+                    <p><input class="btn btn-lg btn-block btn-success" type="submit" name="find" value="Шукати"></p>
+                </div>
+
+                <div class="col-lg-9 col-lg-offset-3">
+                    <p><input class="btn btn-lg btn-block btn-success" type="submit" name="cancel" value="Скинути фільтр пошуку"></p>
+                </div>
+
+            </div>
+        </div>
+    </ol>
+</div>
+
+</form>
+
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+{% if view_all_help == True %}
+    <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <div class="section">
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <h4><b style="padding-left: 15px">Критерії пошуку: </b></h4>
+                    </div>
+
+                    <div class="col-lg-9">
+
+                        {% if view_all_manafacturer == True %}
+                            <h5>
+                                <span><b>Виробник:&nbsp;</b></span>
+                                {% for manafacturer_info in info_manafacturer_veb %}
+                                    <span>&nbsp;{{ manafacturer_info.name_manufacturer }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_country == True %}
+                            <h5>
+                                <span><b>Країна:&nbsp;</b></span>
+                                {% for country_info in info_country_veb %}
+                                    <span>&nbsp;{{ country_info.name_manufacturer_country }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_price == True %}
+                            <h5>
+                                <span><b>Ціновий диаппазон:&nbsp;</b></span>
+                                {% for price_info in info_price_veb %}
+                                    <span>&nbsp;{{ price_info.name_price_group }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_availability == True %}
+                            <h5>
+                                <span><b>Наявність:&nbsp;</b></span>
+                                {% for availability_info in info_availability_veb %}
+                                    <span>&nbsp;{{ availability_info.name_availability }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_application == True %}
+                            <h5>
+                                <span><b>Застосування:&nbsp;</b></span>
+                                {% for application in result_application %}
+                                    <span>&nbsp;{{ application }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_type_material == True %}
+                            <h5>
+                                <span><b>Тип матеріалу:&nbsp;</b></span>
+                                {% for type_material in result_type_material %}
+                                    <span>&nbsp;{{ type_material }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+            </div>
+        </ol>
+    </div>
+{% endif %}
+
+<div style="padding-right: 40px; padding-left: 40px">
+    {% if resilt_collections_images != Null %}
+            {% for result_only_c in resilt_collections_images %}
+                    {% include 'products/collection_for_search_ukr.html' %}
+            {% endfor %}
+    {% endif %}
+</div>
+
+<!--Пагинация страницы - начало-->
+{% if response_view == True %}
+    <div class="section" align="center">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if resilt_collections_images.has_previous %}
+                            <a href="{{ response_for_web.response }}&page={{ resilt_collections_images.previous_page_number }}">назад</a>
+                        {% endif %}
+
+                        <span class="current">
+                            сторінка {{ resilt_collections_images.number }} з {{ resilt_collections_images.paginator.num_pages }}.
+                        </span>
+
+                        {% if resilt_collections_images.has_next %}
+                            <a href="{{ response_for_web.response }}&page={{ resilt_collections_images.next_page_number }}">вперед</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if response_view == False %}
+    <div class="section" align="center">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if resilt_collections_images.has_previous %}
+                            <a href="?page={{ resilt_collections_images.previous_page_number }}">назад</a>
+                        {% endif %}
+
+                        <span class="current">
+                            сторінка {{ resilt_collections_images.number }} з {{ resilt_collections_images.paginator.num_pages }}
+                        </span>
+
+                        {% if resilt_collections_images.has_next %}
+                            <a href="?page={{ resilt_collections_images.next_page_number }}">вперед</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!--Пагинация страницы - конец-->
+
+{% endblock content %}

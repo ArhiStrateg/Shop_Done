@@ -1,0 +1,743 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 25px;">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 6px rgba(0,0,0,0.2);">
+        <li><a href="{% url 'main'%}"><i class=""></i> Главная</a></li>
+        <li class="active"><span><i class=""></i> Расширенный поиск</span></li>
+    </ol>
+</div>
+
+<form action="{% url 'search_hight' %}" method="GET">
+
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+        <div class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2><b style="padding-left: 15px">Параметры поиска</b></h2>
+                </div>
+
+                        <div class="col-lg-12" align="center">
+                            {% for search_nhs_web in search_nhs %}
+                                <a><input name="nhs" value={{ search_nhs_web.id }} type="checkbox"/>&nbsp;{{ search_nhs_web.name_collection_nhs }}</a>
+                            {% endfor %}
+                        </div>
+                    <br>
+                    <ol>
+                        &nbsp;
+                    </ol>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите наличие
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            {% for availability_s_web in availability_s %}
+                                <li><a class="small" data-value="{{ availability_s_web.id }}" name="search_hight"
+                                       value={{ availability_s_web.id }} tabIndex="-1">
+                                    <input name="availability" value={{ availability_s_web.id }} type="checkbox"/>
+                                    &nbsp;{{ availability_s_web.name_availability }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите ценовой диапазон
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            {% for price_web in price %}
+                                <li><a class="small" data-value="{{ price_web.id }}" name="search_hight"
+                                       value={{ price_web.id }} tabIndex="-1">
+                                    <input name="price" value={{ price_web.id }} type="checkbox"/>
+                                    &nbsp;{{ price_web.name_price_group }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите применение
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="bathrooms" name="search_hight" value=bathrooms tabIndex="-1">
+                                <input name="application" value=bathrooms type="checkbox"/>
+                                &nbsp;Для ванных комнат
+                            </a></li>
+                            <li><a class="small" data-value="floor" name="search_hight" value=floor tabIndex="-1">
+                                <input name="application" value=floor type="checkbox"/>
+                                &nbsp;Для кухни / Напольная плитка
+                            </a></li>
+                            <li><a class="small" data-value="apron" name="search_hight" value=apron tabIndex="-1">
+                                <input name="application" value=apron type="checkbox"/>
+                                &nbsp;Для кухни / Фартук
+                            </a></li>
+                            <li><a class="small" data-value="outdoor" name="search_hight" value=outdoor tabIndex="-1">
+                                <input name="application" value=outdoor type="checkbox"/>
+                                &nbsp;Для уличного применения
+                            </a></li>
+                            <li><a class="small" data-value="residential" name="search_hight" value=residential tabIndex="-1">
+                                <input name="application" value=residential type="checkbox"/>
+                                &nbsp;Жилой интерьер
+                            </a></li>
+                            <li><a class="small" data-value="projects" name="search_hight" value=projects tabIndex="-1">
+                                <input name="application" value=projects type="checkbox"/>
+                                &nbsp;Общественные интерьеры
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите тип материала
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="grout" name="search_hight" value=grout tabIndex="-1">
+                                <input name="type_material" value=grout type="checkbox"/>
+                                &nbsp;Затирка/Строительная химия
+                            </a></li>
+                            <li><a class="small" data-value="ceramic" name="search_hight" value=ceramic tabIndex="-1">
+                                <input name="type_material" value=ceramic type="checkbox"/>
+                                &nbsp;Керамическая плитка
+                            </a></li>
+                            <li><a class="small" data-value="porcelain" name="search_hight" value=porcelain tabIndex="-1">
+                                <input name="type_material" value=porcelain type="checkbox"/>
+                                &nbsp;Керамогранит
+                            </a></li>
+                            <li><a class="small" data-value="clinker" name="search_hight" value=clinker tabIndex="-1">
+                                <input name="type_material" value=clinker type="checkbox"/>
+                                &nbsp;Клинкерная плитка
+                            </a></li>
+                            <li><a class="small" data-value="natural" name="search_hight" value=natural tabIndex="-1">
+                                <input name="type_material" value=natural type="checkbox"/>
+                                &nbsp;Натуральный камень
+                            </a></li>
+                            <li><a class="small" data-value="leveling" name="search_hight" value=leveling tabIndex="-1">
+                                <input name="type_material" value=leveling type="checkbox"/>
+                                &nbsp;Система выравнивания плитки
+                            </a></li>
+                             <li><a class="small" data-value="glass" name="search_hight" value=glass tabIndex="-1">
+                                <input name="type_material" value=glass type="checkbox"/>
+                                &nbsp;Стеклянная мозаика
+                            </a></li>
+                             <li><a class="small" data-value="steps" name="search_hight" value=steps tabIndex="-1">
+                                <input name="type_material" value=steps type="checkbox"/>
+                                &nbsp;Ступени
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите текстуру
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="3d" name="search_hight" value=3d tabIndex="-1">
+                                <input name="texturer" value=3d type="checkbox"/>
+                                &nbsp;3D/Трехмерная
+                            </a></li>
+                            <li><a class="small" data-value="art" name="search_hight" value=art tabIndex="-1">
+                                <input name="texturer" value=art type="checkbox"/>
+                                &nbsp;Арт
+                            </a></li>
+                            <li><a class="small" data-value="concrete" name="search_hight" value=concrete tabIndex="-1">
+                                <input name="texturer" value=concrete type="checkbox"/>
+                                &nbsp;Бетон/Цемент/Штукатурка
+                            </a></li>
+                            <li><a class="small" data-value="geometrical" name="search_hight" value=geometrical tabIndex="-1">
+                                <input name="texturer" value=geometrical type="checkbox"/>
+                                &nbsp;Геометрический рисунок
+                            </a></li>
+                            <li><a class="small" data-value="damaskato" name="search_hight" value=damaskato tabIndex="-1">
+                                <input name="texturer" value=damaskato type="checkbox"/>
+                                &nbsp;Дамаскато/Вензеля
+                            </a></li>
+                            <li><a class="small" data-value="wood" name="search_hight" value=wood tabIndex="-1">
+                                <input name="texturer" value=wood type="checkbox"/>
+                                &nbsp;Дерево/Керамический паркет
+                            </a></li>
+                            <li><a class="small" data-value="imitationbrick" name="search_hight" value=imitationbrick tabIndex="-1">
+                                <input name="texturer" value=imitationbrick type="checkbox"/>
+                                &nbsp;Имитация кирпичной кладки
+                            </a></li>
+                            <li><a class="small" data-value="imitationskin" name="search_hight" value=imitationskin tabIndex="-1">
+                                <input name="texturer" value=imitationskin type="checkbox"/>
+                                &nbsp;Имитация кожи
+                            </a></li>
+                            <li><a class="small" data-value="rock" name="search_hight" value=rock tabIndex="-1">
+                                <input name="texturer" value=rock type="checkbox"/>
+                                &nbsp;Камень
+                            </a></li>
+                            <li><a class="small" data-value="cotto" name="search_hight" value=cotto tabIndex="-1">
+                                <input name="texturer" value=cotto type="checkbox"/>
+                                &nbsp;Котто/Имитация
+                            </a></li>
+                            <li><a class="small" data-value="crackle" name="search_hight" value=crackle tabIndex="-1">
+                                <input name="texturer" value=crackle type="checkbox"/>
+                                &nbsp;Кракле
+                            </a></li>
+                            <li><a class="small" data-value="metal" name="search_hight" value=metal tabIndex="-1">
+                                <input name="texturer" value=metal type="checkbox"/>
+                                &nbsp;Металл
+                            </a></li>
+                            <li><a class="small" data-value="monocolor" name="search_hight" value=monocolor tabIndex="-1">
+                                <input name="texturer" value=monocolor type="checkbox"/>
+                                &nbsp;Моноколор
+                            </a></li>
+                            <li><a class="small" data-value="marble" name="search_hight" value=marble tabIndex="-1">
+                                <input name="texturer" value=marble type="checkbox"/>
+                                &nbsp;Мрамор
+                            </a></li>
+                            <li><a class="small" data-value="onyx" name="search_hight" value=onyx tabIndex="-1">
+                                <input name="texturer" value=onyx type="checkbox"/>
+                                &nbsp;Оникс
+                            </a></li>
+                            <li><a class="small" data-value="patchwork" name="search_hight" value=patchwork tabIndex="-1">
+                                <input name="texturer" value=patchwork type="checkbox"/>
+                                &nbsp;Патчворк
+                            </a></li>
+                            <li><a class="small" data-value="cloth" name="search_hight" value=cloth tabIndex="-1">
+                                <input name="texturer" value=cloth type="checkbox"/>
+                                &nbsp;Ткань
+                            </a></li>
+                            <li><a class="small" data-value="travertine" name="search_hight" value=travertine tabIndex="-1">
+                                <input name="texturer" value=travertine type="checkbox"/>
+                                &nbsp;Травертин
+                            </a></li>
+                            <li><a class="small" data-value="flowers" name="search_hight" value=flowers tabIndex="-1">
+                                <input name="texturer" value=flowers type="checkbox"/>
+                                &nbsp;Цветы/Растения
+                            </a></li>
+                            <li><a class="small" data-value="ethnic" name="search_hight" value=ethnic tabIndex="-1">
+                                <input name="texturer" value=ethnic type="checkbox"/>
+                                &nbsp;Этнический рисунок
+                            </a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите фактуру
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="glossy" name="search_hight" value=glossy tabIndex="-1">
+                                <input name="facturer" value=glossy type="checkbox"/>
+                                &nbsp;Глянцевая/Настенная
+                            </a></li>
+
+                            <li><a class="small" data-value="matte" name="search_hight" value=matte tabIndex="-1">
+                                <input name="facturer" value=matte type="checkbox"/>
+                                &nbsp;Матовая
+                            </a></li>
+                            <li><a class="small" data-value="polished" name="search_hight" value=polished tabIndex="-1">
+                                <input name="facturer" value=polished type="checkbox"/>
+                                &nbsp;Полированная
+                            </a></li>
+                            <li><a class="small" data-value="polopolarized" name="search_hight" value=polopolarized tabIndex="-1">
+                                <input name="facturer" value=polopolarized type="checkbox"/>
+                                &nbsp;Полуполированная/Лапатированная
+                            </a></li>
+                            <li><a class="small" data-value="satin" name="search_hight" value=satin tabIndex="-1">
+                                <input name="facturer" value=satin type="checkbox"/>
+                                &nbsp;Сатинированная
+                            </a></li>
+                            <li><a class="small" data-value="aged" name="search_hight" value=aged tabIndex="-1">
+                                <input name="facturer" value=aged type="checkbox"/>
+                                &nbsp;Состаренная/Рустичная
+                            </a></li>
+                            <li><a class="small" data-value="structured" name="search_hight" value=structured tabIndex="-1">
+                                <input name="facturer" value=structured type="checkbox"/>
+                                &nbsp;Структурированная/Рельефная
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите стиль
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="vintage" name="search_hight" value=vintage tabIndex="-1">
+                                <input name="style" value=vintage type="checkbox"/>
+                                &nbsp;Винтаж
+                            </a></li>
+
+                            <li><a class="small" data-value="classic" name="search_hight" value=classic tabIndex="-1">
+                                <input name="style" value=classic type="checkbox"/>
+                                &nbsp;Kлассика
+                            </a></li>
+
+                            <li><a class="small" data-value="modern" name="search_hight" value=modern tabIndex="-1">
+                                <input name="style" value=modern type="checkbox"/>
+                                &nbsp;Cовременный
+                            </a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите тип применения
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="floor" name="search_hight" value=floor tabIndex="-1">
+                                <input name="type_floor" value=floor type="checkbox"/>
+                                &nbsp;Для пола
+                            </a></li>
+
+                            <li><a class="small" data-value="wall" name="search_hight" value=wall tabIndex="-1">
+                                <input name="type_floor" value=wall type="checkbox"/>
+                                &nbsp;Для стен
+                            </a></li>
+
+                            <li><a class="small" data-value="universal" name="search_hight" value=universal tabIndex="-1">
+                                <input name="type_floor" value=universal type="checkbox"/>
+                                &nbsp;Универсальная
+                            </a></li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите формат
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            {% for size_web in size %}
+                                <li><a class="small" data-value="{{ size_web.id }}" name="search_hight"
+                                       value={{ size_web.id }} tabIndex="-1">
+                                    <input name="size" value={{ size_web.id }} type="checkbox"/>
+                                    &nbsp;{{ size_web.name_size }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">
+                                Выберите цвет
+                            </b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul align="left" class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="beige" name="search_hight" value=beige tabIndex="-1">
+                                <input name="colour" value=beige type="checkbox"/>
+                                &nbsp;Бежевый
+                            </a></li>
+                           <li><a class="small" data-value="white" name="search_hight" value=white tabIndex="-1">
+                                <input name="colour" value=white type="checkbox"/>
+                                &nbsp;Белый
+                            </a></li>
+                           <li><a class="small" data-value="burgundy" name="search_hight" value=burgundy tabIndex="-1">
+                                <input name="colour" value=burgundy type="checkbox"/>
+                                &nbsp;Бордовый
+                            </a></li>
+                           <li><a class="small" data-value="blue" name="search_hight" value=blue tabIndex="-1">
+                                <input name="colour" value=blue type="checkbox"/>
+                                &nbsp;Голубой
+                            </a></li>
+                           <li><a class="small" data-value="yellow" name="search_hight" value=yellow tabIndex="-1">
+                                <input name="colour" value=yellow type="checkbox"/>
+                                &nbsp;Желтый
+                            </a></li>
+                           <li><a class="small" data-value="green" name="search_hight" value=green tabIndex="-1">
+                                <input name="colour" value=green type="checkbox"/>
+                                &nbsp;Зеленый
+                            </a></li>
+                           <li><a class="small" data-value="gold" name="search_hight" value=gold tabIndex="-1">
+                                <input name="colour" value=gold type="checkbox"/>
+                                &nbsp;Золотой
+                            </a></li>
+                           <li><a class="small" data-value="brown" name="search_hight" value=brown tabIndex="-1">
+                                <input name="colour" value=brown type="checkbox"/>
+                                &nbsp;Коричневый
+                            </a></li>
+                           <li><a class="small" data-value="red" name="search_hight" value=red tabIndex="-1">
+                                <input name="colour" value=red type="checkbox"/>
+                                &nbsp;Красный
+                            </a></li>
+                           <li><a class="small" data-value="multicolor" name="search_hight" value=multicolor tabIndex="-1">
+                                <input name="colour" value=multicolor type="checkbox"/>
+                                &nbsp;Мультиколор
+                            </a></li>
+                           <li><a class="small" data-value="orange" name="search_hight" value=orange tabIndex="-1">
+                                <input name="colour" value=orange type="checkbox"/>
+                                &nbsp;Оранжевый
+                            </a></li>
+                           <li><a class="small" data-value="pink" name="search_hight" value=pink tabIndex="-1">
+                                <input name="colour" value=pink type="checkbox"/>
+                                &nbsp;Розовый
+                            </a></li>
+                           <li><a class="small" data-value="silver_platinum" name="search_hight" value=silver_platinum tabIndex="-1">
+                                <input name="colour" value=silver_platinum type="checkbox"/>
+                                &nbsp;Cеребряный/Платина
+                            </a></li>
+                           <li><a class="small" data-value="silver_grey" name="search_hight" value=silver_grey tabIndex="-1">
+                                <input name="colour" value=silver_grey type="checkbox"/>
+                                &nbsp;Серый
+                            </a></li>
+                           <li><a class="small" data-value="silver_darkblue" name="search_hight" value=silver_darkblue tabIndex="-1">
+                                <input name="colour" value=silver_darkblue type="checkbox"/>
+                                &nbsp;Синий
+                            </a></li>
+                           <li><a class="small" data-value="silver_lilac" name="search_hight" value=silver_lilac tabIndex="-1">
+                                <input name="colour" value=silver_lilac type="checkbox"/>
+                                &nbsp;Сиреневый
+                            </a></li>
+                           <li><a class="small" data-value="silver_black" name="search_hight" value=silver_black tabIndex="-1">
+                                <input name="colour" value=silver_black type="checkbox"/>
+                                &nbsp;Черный
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="submit" class="btn-find block_collection" name="find" value="Искать"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;">
+                            <b style="font-size: 95%;">
+                                Искать
+                            </b>
+                        </button>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3" align="center" style="margin-bottom: 10px; margin-top: 10px;">
+                        <button type="submit" class="btn-can block_collection" name="cancel" value="Сбросить фильтр поиска"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px; width: 90%;">
+                            <b style="font-size: 95%;">
+                                Сбросить фильтр поиска
+                            </b>
+                        </button>
+                        </ul>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+{% if new_search == True %}
+    {% if view_all_help == True %}
+        <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+                box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <div class="section">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 align="center" style="font-size: 150%"><b>Выберите критерии для поиска</b></h5>
+                        </div>
+                    </div>
+                </div>
+            </ol>
+            <ol>
+                &nbsp;
+            </ol>
+        </div>
+    {% endif %}
+{% endif %}
+
+{% if new_search == False %}
+
+    {% if resilt_collections_images %}
+        {% if view_all_help == True %}
+            <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+                    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+                    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <div class="section">
+                        <div class="row">
+
+                            <div class="col-lg-3">
+                                <h4><b style="padding-left: 15px">Критерии поиска: </b></h4>
+                            </div>
+
+                            <div class="col-lg-9">
+
+                                {% if view_all_nhs == True %}
+                                    <h5>
+                                        <span><b>Состояние товарной группы:&nbsp;</b></span>
+                                        {% for nhs_info in info_nhs_veb %}
+                                            <span>&nbsp;{{ nhs_info.name_collection_nhs }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_manafacturer == True %}
+                                    <h5>
+                                        <span><b>Производитель:&nbsp;</b></span>
+                                        {% for manafacturer_info in info_manafacturer_veb %}
+                                            <span>&nbsp;{{ manafacturer_info.name_manufacturer }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_size == True %}
+                                    <h5>
+                                        <span><b>Размер:&nbsp;</b></span>
+                                        {% for size_info in info_size_veb %}
+                                            <span>&nbsp;{{ size_info.name_size }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_country == True %}
+                                    <h5>
+                                        <span><b>Страна:&nbsp;</b></span>
+                                        {% for country_info in info_country_veb %}
+                                            <span>&nbsp;{{ country_info.name_manufacturer_country }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_price == True %}
+                                    <h5>
+                                        <span><b>Ценовой диаппазон:&nbsp;</b></span>
+                                        {% for price_info in info_price_veb %}
+                                            <span>&nbsp;{{ price_info.name_price_group }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_availability == True %}
+                                    <h5>
+                                        <span><b>Наличие:&nbsp;</b></span>
+                                        {% for availability_info in info_availability_veb %}
+                                            <span>&nbsp;{{ availability_info.name_availability }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_colour == True %}
+                                    <h5>
+                                        <span><b>Цвет:&nbsp;</b></span>
+                                        {% for colour in result_colour %}
+                                            <span>&nbsp;{{ colour }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_facturer == True %}
+                                    <h5>
+                                        <span><b>Фактура:&nbsp;</b></span>
+                                        {% for facturer in result_facturer %}
+                                            <span>&nbsp;{{ facturer }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_texturer == True %}
+                                    <h5>
+                                        <span><b>Текстура:&nbsp;</b></span>
+                                        {% for texturer in result_texturer %}
+                                            <span>&nbsp;{{ texturer }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_application == True %}
+                                    <h5>
+                                        <span><b>Применение:&nbsp;</b></span>
+                                        {% for application in result_application %}
+                                            <span>&nbsp;{{ application }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_style == True %}
+                                    <h5>
+                                        <span><b>Стиль:&nbsp;</b></span>
+                                        {% for style in result_style %}
+                                            <span>&nbsp;{{ style }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_type_material == True %}
+                                    <h5>
+                                        <span><b>Тип материала:&nbsp;</b></span>
+                                        {% for type_material in result_type_material %}
+                                            <span>&nbsp;{{ type_material }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+
+                                {% if view_all_type_floor == True %}
+                                    <h5>
+                                        <span><b>Тип применения:&nbsp;</b></span>
+                                        {% for type_floor in result_type_floor %}
+                                            <span>&nbsp;{{ type_floor }}&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </ol>
+
+                <ol>
+                    &nbsp;
+                </ol>
+
+            </div>
+        {% endif %}
+
+    {% else %}
+        {% if view_all_help == True %}
+            <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px">
+                    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+                    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <div class="section">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% if marker == True %}
+                                    <h5 align="center">
+                                        <span style="font-size: 150%"><b>Поиск результатов не дал :(</b></span>
+                                    </h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </ol>
+
+            </div>
+        {% endif %}
+    {% endif %}
+
+{% endif %}
+
+<div class="row">
+    {% if new_search == False and resilt_collections_images %}
+        <div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+            {% if resilt_collections_images != Null %}
+                    {% for result_only_c in resilt_collections_images %}
+
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product_item">
+                                {% include 'products/collection_for_search.html' %}
+                            </div>
+
+                    {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+
+
+
+    {% if response_view == True %}
+        <div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="pagination">
+                        {% if resilt_collections_images.has_previous %}
+                            <li>
+                                <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection" href="{{ response_for_web.response }}&page={{ resilt_collections_images.previous_page_number }}">
+                                    назад
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="disabled">
+                            <a style="margin-left: 10px; margin-right: 10px;">
+                                страница {{ resilt_collections_images.number }} из {{ resilt_collections_images.paginator.num_pages }}
+                            </a>
+                        </li>
+                        {% if resilt_collections_images.has_next %}
+                            <li>
+                                <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection" href="{{ response_for_web.response }}&page={{ resilt_collections_images.next_page_number }}">
+                                    вперед
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% if response_view == False %}
+        <div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="pagination">
+                        {% if resilt_collections_images.has_previous %}
+                            <li>
+                                <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection" href="?page={{ resilt_collections_images.previous_page_number }}">
+                                    назад
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="disabled">
+                            <a style="margin-left: 10px; margin-right: 10px;">
+                                страница {{ resilt_collections_images.number }} из {{ resilt_collections_images.paginator.num_pages }}
+                            </a>
+                        </li>
+                        {% if resilt_collections_images.has_next %}
+                            <li>
+                                <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection" href="?page={{ resilt_collections_images.next_page_number }}">
+                                    вперед
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> This is PAGE COLLECTIONS </h1>
+<br>
+
+{% for collection_for_web in collections %}
+    <h3> Collection_Images </h3>
+
+    <a href="{% url 'collection_singl' collection_for_web.name_collection.id %}">
+        name_manufacturer_country - {{ collection_for_web.name_collection }}<br>
+        id - {{ collection_for_web.name_collection.id }}<br>
+
+    </a>
+
+
+    name_collection - {{ collection_for_web.name_collection }}<br>
+    image_collection - {{ collection_for_web.image_collection }}<br>
+    <h3> Collection_Info </h3>
+    manufacturer_collection - {{ collection_for_web.name_collection.manufacturer_collection }}<br>
+    availability_collection - {{ collection_for_web.name_collection.availability_collection }}<br>
+    description_collection - {{ collection_for_web.name_collection.description_collection }}<br>
+    price_group_collection - {{ collection_for_web.name_collection.price_group_collection }}<br>
+
+    <h4> Manufacturer </h4>
+    name_manufacturer - {{ collection_for_web.name_collection.manufacturer_collection.name_manufacturer }}<br>
+    name_manufacturer - {{ collection_for_web.name_collection.manufacturer_collection.image_logo_manufacturer }}<br>
+    manufacturer_country - {{ collection_for_web.name_collection.manufacturer_collection.manufacturer_country }}<br>
+    <hr>
+
+{% endfor %}
+
+{% endblock content %}

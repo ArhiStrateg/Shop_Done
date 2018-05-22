@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ product_singl_web.keyword }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ product_singl_web.description }}">
+{% endblock meta_description %}
+
+{% block title %}
+    {{ product_singl_web.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ product_singl_web.title }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ product_singl_web.title }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ product_singl_web.description }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main'%}"><i class=""></i> Главная</a></li>
+        <li><a href="{% url 'manufacturer'%}"><i class=""></i> Каталог</a></li>
+        <li><a href="{% url 'manufacturer_singl' product_singl_web.collection_product.manufacturer_collection.id%}"><i class=""></i> {{ product_singl_web.collection_product.manufacturer_collection.name_manufacturer }}</a></li>
+        <li><a href="{% url 'collection_singl' product_singl_web.collection_product.id %}"><i class=""></i> {{ product_singl_web.collection_product.name_collection }}</a></li>
+        <li class="active"><span><i class=""></i> {{ product_singl_web.name_product }}</span></li>
+    </ol>
+</div>
+
+
+
+<div class="container" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <div class="col-lg-6">
+            {% for image_item in image_for_product_singl_web %}
+                <div style="margin-top: 20px">
+                        <div class="product-image-item img-center">
+                            <img src="{{ image_item.image.url }}" class="img-responsive img-center-product">
+                        </div>
+                </div>
+            {% endfor %}
+
+            <!--Кнопка КУПИТЬ-->
+            <div class="img-center" style="margin-top: 20px">
+                <form id="form_buying_product" class="form-inline" action="{% url 'basket_adding' %}">{% csrf_token %}
+                    <input type="number" class="form-control" name="number" id="number"
+                           data-product_id = "{{ list_img_product.id }}"
+                           data-name = "{{ list_img_product.name }}">
+                    м<sup><small>2</small></sup>
+
+                    <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
+                        data-product_id = "{{ product_singl_web.id }}"
+                        data-name = "{{ product_singl_web.name_product }}"
+                        >
+                        Купить
+                    </button>
+                </form>
+            </div>
+            <!--Окончание кнопки КУПИТЬ-->
+        </div>
+        <div class="col-lg-6">
+            <h1 class="text-center">
+                {{ product_singl_web.name_product }}
+                <h6 class="text-center">
+
+                </h6>
+            </h1>
+
+            <div>
+                <ul class="nav nav-tabs" role="tablist">
+                     <li role="presentation" class="active">
+                     <li role="presentation" class="active">
+                         <a href="#description" aria-controls="home" role="tab" data-toggle="tab">
+                             Описание
+                         </a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#info_collection" aria-controls="profile" role="tab" data-toggle="tab">
+                            Информация о коллекции
+                        </a>
+                     </li>
+                     <li role="presentation">
+                        <a href="#info_manafactory" aria-controls="profile" role="tab" data-toggle="tab">
+                            Информация о производителе
+                        </a>
+                     </li>
+                </ul>
+                    <div class="tab-content product-description-tabs">
+                        <div role="tabpanel" class="tab-pane active" id="description">
+                            <div style="padding-top: 20px; padding-left: 20px; padding-right: 20px;padding-bottom: 20px; line-height: 1.5">
+                                Тип - {{ product_singl_web.product_type_product.name_product_type }}<br>
+                                Размер - {{ product_singl_web.size_product }}<br>
+                                Код продукта - {{ product_singl_web.vendor_code_product }}<br>
+                                Ценовая категория - {{ product_singl_web.collection_product.price_group_collection }}<br>
+                                Наименование коллекции -
+                                <a href="{% url 'collection_singl' product_singl_web.collection_product.id %}">
+                                    {{ product_singl_web.collection_product.name_collection }}<br>
+                                </a>
+                                Наименование производителя -
+                                    <a href="{% url 'manufacturer_singl' product_singl_web.collection_product.manufacturer_collection.id%}">
+                                        {{ product_singl_web.collection_product.manufacturer_collection.name_manufacturer }}<br>
+                                    </a>
+                                Страна-производитель - {{ product_singl_web.collection_product.manufacturer_collection.manufacturer_country.name_manufacturer_country }}<br>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="info_collection" style="line-height: 1.5">
+                            <h2 class="text-center">Коллекция
+
+                                <a href="{% url 'collection_singl' product_singl_web.collection_product.id %}">
+                                    {{ product_singl_web.collection_product.name_collection }}<br>
+                                </a>
+                            </h2>
+                            <h3 class="text-center">
+                                Описание
+                            </h3>
+                            <p>
+                                {{ product_singl_web.collection_product.short_description_collection | safe }}
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="info_manafactory" style="line-height: 1.5">
+                            <h2 class="text-center">Производитель
+                                <a href="{% url 'manufacturer_singl' product_singl_web.collection_product.manufacturer_collection.id%}">
+                                    {{ product_singl_web.collection_product.manufacturer_collection.name_manufacturer }}<br>
+                                </a>
+                            </h2>
+                        <h3 class="text-center">
+                        Описание
+                        </h3>
+                        <p>
+                            {{ product_singl_web.collection_product.manufacturer_collection.short_description_manufacturer | safe }}
+                        </p>
+                        </div>
+                    <div role="tabpanel" class="tab-pane" >...</div>
+                    <div role="tabpanel" class="tab-pane" >...</div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

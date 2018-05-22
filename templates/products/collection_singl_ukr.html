@@ -1,0 +1,191 @@
+{% extends "base_ukr.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ collection_singl_web.keyword_ukr }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ collection_singl_web.description_ukr }}">
+{% endblock meta_description %}
+
+{% block title %}
+    {{ collection_singl_web.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ collection_singl_web.title_ukr }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ collection_singl_web.title_ukr }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ collection_singl_web.description_ukr }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main_ukr'%}"><i class=""></i> Головна</a></li>
+        <li><a href="{% url 'manufacturer_ukr'%}"><i class=""></i> Каталог</a></li>
+        <li><a href="{% url 'manufacturer_singl_ukr' collection_singl_web.manufacturer_collection.id%}"><i class=""></i> {{ collection_singl_web.manufacturer_collection.name_manufacturer }}</a></li>
+        <li class="active"><span><i class=""></i> {{ collection_singl_web.name_collection }}</span></li>
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <div class="row">
+
+        <div class="col-lg-3" style="padding-left: 40px; padding-top: 20px">
+            <h1>{{ collection_singl_web.manufacturer_collection }}</h1>
+            <h1><b>{{ collection_singl_web.name_collection }}</b></h1>
+
+            </h1>
+        </div>
+        <div class="col-lg-6" style="padding-top: 20px">
+
+<!--Текст с кнопками читать далее - Начало-->
+        <div id="h0" style="line-height: 1.5">
+           {{ collection_singl_web.short_description_collection_ukr | safe }}
+            <button type="submit" onClick="document.getElementById('h0').style.display='none';document.getElementById('h1').style.display='';return false;" class="btn btn-success">Читати далі</button>
+           </div>
+        <div id="h1" style="display:none; line-height: 1.5">
+            {{ collection_singl_web.short_description_collection_ukr | safe }}
+            {{ collection_singl_web.description_collection_ukr | safe }}
+            <div class="text-align:  center">
+            <button type="submit" onClick="document.getElementById('h1').style.display='none';document.getElementById('h0').style.display='';return false;" class="btn btn-success">Приховати текст</button>
+            </div>
+        </div>
+<!--Текст с кнопками читать далее - конец-->
+        </div>
+        <div class="col-lg-3">
+            <div align="center" style="padding-top: 20px">
+                <h5 style="font-size: 130%; margin-left: 5px"><b>Особливості:</b></h5>
+                <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                <h5 style="font-size: 100%">
+                    <table>
+                        <td>
+                            <div align="center">
+                                <tr><b>Наявність: </b></tr>
+                                <tr><span style="text-align: center">{{ collection_singl_web.availability_collection.name_availability_ukr }}</span></tr><br>
+                            </div>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>Цінова група: </b></tr>
+                            <tr>{{ collection_singl_web.price_group_collection }}</tr><br>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>Країна: </b></tr>
+                            <tr>{{ collection_singl_web.manufacturer_collection.manufacturer_country.name_manufacturer_country_ukr }}</tr><br>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                        <td>
+                            <tr><b>PDF каталог: </b></tr>
+                            <tr><a href="{% url 'main'%}media/{{ collection_singl_web.price_download }}" target="_blank" download>Завантажити</a></tr><br>
+                        </td>
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+
+                    </table>
+                </h5>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="main">-->
+  <div class="cd-slider">
+    <ul>
+        {% for image_for_collection in images_for_collection %}
+          <li>
+            <div class="image" style="background-image:url({{ image_for_collection.image_collection.url }});"></div>
+            <div class="content">
+                <div class="word_slider">
+                  <h2 style="font-size: 50%; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; margin-right: 10px">
+                      {{ collection_singl_web.manufacturer_collection }}
+                  </h2>
+                  <a style="font-size: 50%; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff; margin-right: 10px">
+                      {{ collection_singl_web.name_collection }}
+                  </a>
+                </div>
+            </div>
+          </li>
+        {% endfor %}
+    </ul>
+  </div>
+<!--</div>-->
+
+
+<div style="padding-right: 40px; padding-left: 40px">
+    {% for products_type in list_type %}
+        <div class="collection_products_item">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <div><h2 id="{{ products_type.yacor }}"><b style="padding-left: 15px">{{ products_type.name_product_type_ukr }}</b></h2></div>
+            </ol>
+
+            <ol>
+                &nbsp;
+            </ol>
+        </div>
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for product_image in products_images %}
+
+                            {% if product_image.product.product_type_product == products_type %}
+                                {% include 'products/product_item_ukr.html' %}
+                            {% endif %}
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<br>
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow">
+        <div><h2><b>Надіслати проект / специфікацію на прорахунок:</b></h2></div>
+        {% include 'orders/find_project_ukr.html' %}
+    </ol>
+</div>
+
+                    {% if thenx_for_send == True %}
+
+                        <!--<a href="#" class="overlay_login" id="form_thx"></a>-->
+                        <div class="popup_login">
+                            <div class="row" style="padding-top: 20px; padding-left: 20px; border-right-width: 20px;
+                            padding-right: 20px; padding-bottom: 20px; margin-left: 0; margin-right: 0;">
+                                <h5 align="center" style="font-size: 150%"><b>Добро пожаловать!</b></h5>
+                                <p align="center" style="font-size: 120%">Введите ваш логин и пароль</p>
+                                <form method="post">{% csrf_token %}
+
+                                    <div>
+                                        <label>Логин: </label>
+
+                                    </div>
+
+                                    <div>
+                                        <label>Пароль: </label>
+
+                                    </div>
+
+                                    <div style="width: 100%">
+                                        <p><input class="btn btn-lg btn-block btn-success" type="submit" name="enter" value="Войти"></p>
+                                    </div>
+                                </form>
+                                <a class="close_login"></a>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+{% endblock content %}

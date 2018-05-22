@@ -1,0 +1,210 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li><a href="{% url 'projects_and_orders'%}"><i class=""></i> Заказы и проекты</a></li>
+            <li class="active"><span><i class=""></i> Заказы на покупку</span></li>
+        </ol>
+    </div>
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 5px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Заказы на покупку</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 120%">Общее количество зарегистрированных заказов - {{ orders_all.count }}</h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+
+                    {% for summ_single in sum_result_right %}
+                        <!--ID статуса - {{ status.id }}<br>-->
+                        <h5 style="font-size: 100%" align="left">
+                            <span><b>Наименование статуса</b> - {{ summ_single.status_name }}</span>
+                        </h5>
+
+                        <h5 style="font-size: 100%" align="left">
+                            <span><b>Колличество ордеров данного статуса</b> - {{ summ_single.leni }}</span>
+                        </h5>
+
+                        <h5>
+                            <span><b>ID ордеров</b> - </span>
+                            {% for result in summ_single.orders %}
+                                {{ result.id }}
+                            {% endfor %}
+                        </h5>
+
+                        <hr style="margin-bottom: 5px; margin-top: 5px">
+                    {% endfor %}
+                </ol>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+                <form method="GET">
+                    <div>
+                        <h5 align="center" style="font-size: 150%"><b>Параметры фильтрации</b></h5>
+
+        <!--Параметры поиска по СТАТУСУ ЗАКАЗА - начало -->
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-lg btn-success btn-sm dropdown-toggle"
+                                    style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 14px;
+                                    margin-top: 20px"
+                                    data-toggle="dropdown">
+                                Выберите статус заказа
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" style="width: 100%">
+                                {% for summ_single in sum_result_right %}
+                                    <li><a class="small" data-value="{{ summ_single.id }}" name="search_hight"
+                                           value={{ summ_single.id }} tabIndex="-1">
+                                        <input name="status_id" value={{ summ_single.id }} type="checkbox"/>
+                                        &nbsp;{{ summ_single.status_name }}
+                                    </a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+        <!--Параметры поиска по СТАТУСУ ЗАКАЗА - конец -->
+
+
+                        <div class="col-lg-12" style="margin-top: 10px">
+                            <p><input class="btn btn-lg btn-block btn-success" type="submit" name="find" value="Искать"></p>
+                        </div>
+
+                        <div class="col-lg-12" style="margin-top: 10px">
+                            <p><input class="btn btn-lg btn-block btn-success" type="submit" name="cancel" value="Сбросить фильтр поиска"></p>
+                        </div>
+                    </div>
+                </form>
+                <h5 align="center" style="font-size: 80%">
+                    (Введите параметры фильтрации)
+                </h5>
+            </ol>
+        </div>
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Список</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                </ol>
+
+            <ol>
+                &nbsp;
+            </ol>
+
+                {% for result in sum_result %}
+                    {% if result.leni != 0 %}
+                        {% for order in result.orders %}
+                            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                                <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 5px solid #ffbf00">
+                                <div align="center" style="font-size: 120%"><b>ID заказа</b> - {{ order.id }}<br>
+                                    <span style="font-size: 80%">
+                                    <a href="{% url 'session_key_eye' order.session_key %}" target="_blank">
+                                                    (подробнее о пользователе)
+                                    </a>
+                                    </span>
+                                </div>
+                                <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                                <span><b>Дата подачи ордера</b> - {{ order.created }}</span><br>
+                                <span><b>Статус заказа</b> - {{ result.status_name }}</span><br>
+                                <span><b>ФИО заказчика </b> - {{ order.customer_name }}</span><br>
+                                <span><b>Телефон заказчика </b> - {{ order.customer_phone }}</span><br>
+                                <span><b>E-mail заказчика </b> - {{ order.customer_email }}</span><br>
+
+
+                                        <div align="center" style="font-size: 100%"><b>Перечень товаров</b></div>
+                                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #b9b9b9">
+                                        <table class="table text-center" style="margin-bottom: 0px;">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">
+                                                        <h5 style="font-size: 80%">
+                                                            <b>Наименование товара</b>
+                                                        </h5>
+                                                    </th>
+                                                    <th class="text-center">
+                                                        <h5 style="font-size: 80%">
+                                                            <b>Количество товара</b>
+                                                        </h5>
+                                                    </th>
+                                                    <th class="text-center">
+                                                        <h5 style="font-size: 80%">
+                                                            <b>Ценовая категория товара</b>
+                                                        </h5>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+
+                                            <tbody>
+                                                {% for product_in_orders in products_in_orders %}
+                                                    {% if product_in_orders.order.id == order.id %}
+                                                    <tr>
+                                                        <td>
+                                                            <h5 style="font-size: 80%">
+                                                                {{ product_in_orders.product.name_product }}
+                                                            </h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 style="font-size: 80%">
+                                                                {{ product_in_orders.nmb }}
+                                                            </h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 style="font-size: 80%">
+                                                                {{ product_in_orders.product.collection_product.price_group_collection }}
+                                                            </h5>
+                                                        </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #b9b9b9">
+
+
+                                {% for vtorostep in list_id_result %}
+                                    {% if vtorostep.id_order == order.id %}
+                                        <span>
+                                            <h5 style="font-size: 90%">
+                                                <b>Количество комментариев</b> - {{ vtorostep.leni }}
+                                            </h5>
+                                        </span>
+                                        <span>
+                                            <h5 style="font-size: 90%">
+                                                <b>Дата последнего комментария </b> - {{ vtorostep.max_id.created }}<br>
+                                                <b>Автор последнего комментария </b> - <b>{{ vtorostep.max_id.autor.surname }} {{ vtorostep.max_id.autor.name }} {{ vtorostep.max_id.autor.last_name }}</b>
+                                                ({{ vtorostep.max_id.autor.dolgnoct.dolgnost_nasvanie }})
+
+                                            </h5>
+                                        </span>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <div class="add-to-card-btn text-center" style="margin-bottom: 20px; margin-top: 10px">
+                                    <p>
+                                        <a href="{% url 'order_singl' order.id %}">
+                                            <button class="btn btn-lg btn-block btn-success" style="padding-top: 5px; padding-bottom: 5px">Подробнее</button>
+                                        </a>
+                                    </p>
+                                </div>
+                            </ol>
+
+                            <ol>
+                                &nbsp;
+                            </ol>
+
+
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

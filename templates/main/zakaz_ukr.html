@@ -1,0 +1,128 @@
+{% extends "base_ukr.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ zakaz_info.keyword_ukr }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ zakaz_info.description_ukr }}">
+{% endblock meta_description %}
+
+{% block title %}
+{{ zakaz_info.title_ukr }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ zakaz_info.title_ukr }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ zakaz_info.title_ukr }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ zakaz_info.description_ukr }}">
+{% endblock meta_og_description %}
+
+
+
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+        <li><a href="{% url 'main_ukr'%}"><i class=""></i> Головна</a></li>
+        <li class="active"><span><i class=""></i> Замовлення/Оплата/Доставка</span></li>
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px">
+    <div class="row">
+        <table>
+            <td>
+                <div class="col-lg-12" style="font-size: 88%">
+                    <h5 style="font-size: 120%; margin-left: 5px"><b>Телефони:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                        <h5 style="font-size: 90%">
+                            {% for phone in all_info_contacts %}
+                            <table>
+                                <td>
+                                    <tr><b>{{ phone.text_phone_1_for_contscts_ukr }}: </b></tr>
+                                    <tr>{{ phone.phone_1_for_contscts_ukr }}</tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ phone.text_phone_2_for_contscts_ukr }}: </b></tr>
+                                    <tr>{{ phone.phone_2_for_contscts_ukr }}</tr>
+                                </td>
+                            </table>
+                            {% endfor %}
+                        </h5>
+
+                    <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Адреса:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                         <h5 style="font-size: 90%">
+                            {% for adres in all_info_contacts %}
+                            <table>
+                                <td>
+                                    <tr><b>{{ adres.adress_adress_for_contscts_ukr }}</b></tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ adres.adress_local_for_contscts_ukr }}</b></tr>
+                                </td>
+                            </table>
+                            {% endfor %}
+                        </h5>
+
+
+                    <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Час роботи:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                    <h5 style="font-size: 90%">
+                        {% for time in all_info_contacts %}
+                            <table>
+                                <td>
+                                    <tr><b>{{ time.time_b_for_contscts_ukr }}</b></tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ time.time_v_for_contscts_ukr }}</b></tr>
+                                </td>
+                            </table>
+                        {% endfor %}
+                    </h5>
+
+                    <h5 style="font-size: 120%; margin-top: 20px; margin-left: 5px"><b>Оплата:</b></h5>
+                    <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 2px solid #ffbf00">
+                    <h5 style="font-size: 90%">
+                        {% for pay in all_info_contacts %}
+                            <table>
+                                <td>
+                                    <tr><img src="{{ pay.playment_for_contscts_img.url }}" class="img-responsive" style="width: 100%; opacity: 1"></tr><br>
+                                </td>
+                                <hr style="margin-bottom: 5px; margin-top: 5px">
+                                <td>
+                                    <tr><b>{{ pay.playment_for_contscts_text_ukr | safe }}</b></tr>
+                                </td>
+                            </table>
+                        {% endfor %}
+                    </h5>
+                </div>
+
+                <tr>
+                    <div class="col-lg-3" style="padding-left: 40px">
+                        <h1>Замовлення / Оплата / Доставка</h1>
+                    </div>
+
+                    <div class="col-lg-6" style="padding-top: 20px; margin-bottom: 20px; line-height: 1.5">
+                        {{ zakaz_info.text_for_zakaz_main_ukr | safe }}
+                    </div>
+                </tr>
+
+            </td>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

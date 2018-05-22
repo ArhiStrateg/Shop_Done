@@ -1,0 +1,170 @@
+{% extends "base_for_shadow.html" %}
+
+{% block content %}
+{% if show == True %}
+    <div style="padding-right: 20px; padding-left: 20px; padding-top: 10px; margin-bottom: 15px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <li><a href="{% url 'shadow'%}"><i class=""></i> Теневая область</a></li>
+            <li><a href="{% url 'statistic'%}"><i class=""></i> Статистика</a></li>
+            <li class="active"><span><i class=""></i> Статистика посещений времени и пользователей</span></li>
+        </ol>
+    </div>
+
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%"><b>Статистика посещений времени и пользователей</b></h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество пользователей посетивших сайт</b> - {{ all_users.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество пользователей посетивших сайт (за - {{ now }})</b> - {{ all_users_now.count }}
+                        </span>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Среднее время проведенное на сайте</b> (полный период) - {{ mid_time }}<br>
+                        <span style="font-size: 80%">
+                            <b>Среднее время проведенное на сайте (за - {{ now }})</b> - {{ mid_time_now }}
+                        </span>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество пользователей сделавших приобретение</b> - {{ all_users_buy.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество пользователей сделавших приобретениев (за - {{ now }})</b> - {{ all_users_buy_now.count }}
+                        </span>
+                    </h5>
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 1px solid #ffbf00">
+                    <h5 style="font-size: 100%">
+                        <b>Общее количество пользователей отправивших проект на рассмотрение</b> - {{ all_users_project.count }}<br>
+                        <span style="font-size: 80%">
+                            <b>Количество пользователей отправивших проект на рассмотрение (за - {{ now }})</b> - {{ all_users_project_now.count }}
+                        </span>
+                    </h5>
+                </ol>
+
+                <ol>
+                </ol>
+
+                <ol>
+                    &nbsp;
+                </ol>
+
+<!--Общее количество посещений страниц коллекций - начало-->
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%">
+                        <b>Общая статистика времени посещений</b><br>
+                        <span align="center" style="font-size: 60%">(за - {{ now }})</span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <div style="-webkit-padding-start: 0px; width: 100%">
+
+                        <div>
+                            <h5 align="center" style="font-size: 100%">
+                                <table class="table text-center" style="margin-bottom: 0px;">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">
+                                                <h5 style="font-size: 80%">
+                                                    <b>СК пользователя</b><br>
+                                                    (сессионый ключ)
+                                                </h5>
+                                            </th>
+                                            <th class="text-center">
+                                                <h5 style="font-size: 80%">
+                                                    <b>Время</b><br>
+                                                    (общее)
+                                                </h5>
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            {% for list_all_users_now_web in list_all_users_now %}
+                                                <td>
+                                                    <h5 style="font-size: 80%">
+                                                        {{ list_all_users_now_web.session_key_now }}
+                                                    </h5>
+                                                </td>
+                                                <td>
+                                                    <h5 style="font-size: 80%">
+                                                        {{ list_all_users_now_web.time_now }}
+                                                    </h5>
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </h5>
+                        </div>
+                    </div>
+                </ol>
+<!--Общее количество посещений страниц коллекций - конец-->
+            </ol>
+        </div>
+
+        <div class="col-lg-6" style="padding-right: 20px; padding-left: 20px; padding-top: 10px">
+            <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+<!--Общее количество посещений страниц производителей - начало-->
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 4px solid #ffbf00">
+                    <h5 align="center" style="font-size: 150%">
+                        <b>Общая статистика времени посещений</b><br>
+                        <span align="center" style="font-size: 60%">(полный период)</span>
+                    </h5>
+
+                    <hr style="margin-bottom: 5px; margin-top: 5px; border-top: 2px solid #ffbf00">
+
+                    <div style="-webkit-padding-start: 0px; width: 100%">
+                        <table class="table text-center" style="margin-bottom: 0px;">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <h5 style="font-size: 80%">
+                                            <b>СК пользователя</b><br>
+                                            (сессионый ключ)
+                                        </h5>
+                                    </th>
+                                    <th class="text-center">
+                                        <h5 style="font-size: 80%">
+                                            <b>Время</b><br>
+                                            (общее)
+                                        </h5>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    {% for list_all_users_web in list_all_users %}
+                                        <td>
+                                            <h5 style="font-size: 80%">
+                                                {{ list_all_users_web.session_key }}
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <h5 style="font-size: 80%">
+                                                {{ list_all_users_web.time }}
+                                            </h5>
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+<!--Общее количество посещений страниц производителей - конец-->
+                </ol>
+            </ol>
+        </div>
+    </div>
+{% endif %}
+{% endblock content %}

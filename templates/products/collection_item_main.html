@@ -1,0 +1,44 @@
+   <div class="col-lg-3 product_item" style="padding-top: 10px">
+        <div class="parent">
+                <div class="child" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    <div>
+                        <a href="{% url 'collection_singl' collection_for_manufacturer_web.name_collection.id %}">
+
+                            <img src="{{ collection_for_manufacturer_web.image_collection.url }}" class="img-responsive">
+                            {% if collection_for_manufacturer_web.name_collection.name_collection_nhs != None %}
+                                <span style="position: absolute; top: 5%; background: orange; color: black;
+                                font-weight: 600; margin-left: 10px; padding-bottom: 3px; padding-right: 3px;
+                                padding-top: 3px; padding-left: 3px;">
+                                {{ collection_for_manufacturer_web.name_collection.name_collection_nhs.name_collection_nhs }}</span>
+                            {% endif %}
+
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{% url 'collection_singl' collection_for_manufacturer_web.name_collection.id %}">
+                            <h5 class="text-center">
+                                <strong>{{ collection_for_manufacturer_web.name_collection.manufacturer_collection.name_manufacturer }}</strong><br>
+                                <span>
+
+                                    <strong><b>{{ collection_for_manufacturer_web.name_collection }}</b></strong>
+                                </span>
+                            </h5>
+
+                            <h5 class="text-center">
+                                <div class="for_collection_products_item_bloc">
+                                    {{ collection_for_manufacturer_web.name_collection.short_description_collection | truncatechars_html:280 | safe }}
+                                </div>
+                            </h5>
+                        </a>
+
+                        <div class="add-to-card-btn text-center">
+                            <p>
+                                <a href="{% url 'collection_singl' collection_for_manufacturer_web.name_collection.id %}">
+                                    <button class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px">Подробнее</button>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>

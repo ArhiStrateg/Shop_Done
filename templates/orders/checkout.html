@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div>
+        <div>
+            <div>
+            {% if products_in_bascet %}
+                <div style="padding-right: 40px; padding-left: 40px; padding-top: 25px;">
+                    <h1 class="text-center">Ниже отображены товары в Вашей корзине.</h1>
+                    <h1 class="text-center">Внесите необходимы изменения.</h1>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <form class="form-horizontal" method="post">{% csrf_token %}
+
+
+                                <div class="text-center" style="vertical-align: middle" style="border-top: 1px solid #fff;">
+
+                                    <div style="border-top: 1px solid #fff;">
+                                        {% for product_in_bascet in products_in_bascet %}
+
+                                            {% for list_product in list_vendor_code_product %}
+                                                {% if list_product.only_product.id == product_in_bascet.product.id %}
+                                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding: 15px;">
+                                                            <div align="center" style="box-shadow: 0 0 5px rgba(0,0,0,0.2); border-top: 0px; background-image: url(/media/logo/bg_r.jpg); margin-bottom: 20px;">
+
+                                                                <a href="{{ list_product.vendor_code_product_re }}" data-toggle="modal">
+                                                                    {% for img_product_in_bascet in imgs_products_in_bascet %}
+                                                                        {% if img_product_in_bascet.product.id == product_in_bascet.product.id %}
+                                                                            <div style="padding: 5px;">
+                                                                                <img src="{{ img_product_in_bascet.image_mini.url }}" style="width: 100%; box-shadow: 0 0 5px rgba(0,0,0,0.2);"></br>
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+
+                                                                    <div style="min-height: 80px;">
+                                                                        <div style="width: 100%">
+                                                                            {{ product_in_bascet.product.collection_product.name_collection }}
+                                                                        </div>
+                                                                        <div style="width: 100%">
+                                                                            <b>{{ product_in_bascet.product.name_product }}</b></br>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <b style="font-size: 80%;">Ценовая категория: </b> {{ product_in_bascet.product.collection_product.price_group_collection }}</br>
+                                                                </a>
+
+                                                                <b style="font-size: 80%; color: #999">Количество товара:</b></br>
+                                                                <div class="block_collection btn-class" style="vertical-align: middle">
+                                                                    <input style="box-shadow: 0 0 3px rgba(0,0,0,0.1); border-left-width: 0px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; padding-bottom: 5px; padding-top: 5px; padding-left: 5px; padding-right: 5px;" value="{{ product_in_bascet.nmb }}" type="number" name="product_in_bascet_{{ product_in_bascet.id }}">
+                                                                </div>
+                                                                </br>
+
+                                                                </br>
+                                                                <b style="font-size: 80%; color: #999">Удаление товара:</b>
+                                                                <div class="icheckbox_flat" style="position: relative;">
+                                                                    <input type="checkbox" name="product_is_delet_{{ product_in_bascet.id }}">
+                                                                </div>
+                                                                </br>
+
+                                                                <div class="text-center" align="center">
+                                                                    <button type="submit" class="btn-find btn-lg btn-block block_collection">Сохранить изменения</button>
+                                                                </div>
+
+                                                            </div>
+                                                    </div>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="modal fade" id="{{ list_product.vendor_code_product }}" tabindex="-1" role="dialog" >
+                                                                {% include 'products/product_singl_chekout.html' %}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endfor %}
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="text-center" align="center">
+                        <button type="submit" class="btn-find btn-lg btn-block block_collection" onclick="location.href='{% url 'checkout_order' %}'">Перейти к оформлению заказа</button>
+                    </div>
+
+                </div>
+            {% else %}
+                <h2 class="text-center" >Приносим извинения,</h2>
+                <h2 class="text-center" >в Вашей корзине нет товаров</h2>
+            {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

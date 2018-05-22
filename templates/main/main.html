@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block meta_keywords %}
+    <meta name="keywords" content="{{ manufacturer_singl_web.keyword }}">
+{% endblock meta_keywords %}
+
+{% block meta_description %}
+        <meta name="description" content="{{ manufacturer_singl_web.description }}">
+{% endblock meta_description %}
+
+{% block title %}
+    {{ manufacturer_singl_web.title }}
+{% endblock title %}
+
+{% block meta_title %}
+    <meta name="title" content="{{ manufacturer_singl_web.title }}">
+{% endblock meta_title %}
+
+{% block meta_og_title %}
+    <meta property="og:title" content="{{ manufacturer_singl_web.title }}">
+{% endblock meta_og_title %}
+
+{% block meta_og_description %}
+    <meta property="og:description" content="{{ manufacturer_singl_web.description }}">
+{% endblock meta_og_description %}
+
+{% block content %}
+
+<div style="padding-right: 40px; padding-left: 40px; padding-top: 25px;">
+    <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff); box-shadow: 0 0 6px rgba(0,0,0,0.2);">
+        <li class="active"><span style="color: #000000;"><i></i> Главная</span></li>
+    </ol>
+</div>
+
+<div class="section" style="padding-right: 40px; padding-left: 40px; padding-top: 1px">
+    <div class="row">
+
+        <div class="col-lg-12">
+            <img src="/media/all/oform_4.jpg" style="width: 100%; opacity: 0.08" alt="Plate"><br>
+        </div>
+
+        <div class="col-lg-3 visible-sm visible-md visible-lg" style="padding-left: 20px;">
+            <h1><strong>{{ manufacturer_singl_web.name_manufacturer }}</strong></h1>
+        </div>
+
+        <div class="col-lg-3 visible-xs">
+            <h1 align="center"><strong>{{ manufacturer_singl_web.name_manufacturer }}</strong></h1>
+        </div>
+        <div class="col-lg-6" style="padding-top: 20px">
+
+        <div id="h0" style="line-height: 1.5">
+
+            <div class="visible-sm visible-md visible-lg">
+                <p>{{ manufacturer_singl_web.short_description_manufacturer | safe }}</p>
+            </div>
+
+            <div class="visible-xs" >
+                <p align="center">{{ manufacturer_singl_web.short_description_manufacturer | safe }}</p>
+            </div>
+
+            <button type="submit" onClick="document.getElementById('h0').style.display='none';document.getElementById('h1').style.display='';return false;"
+                    class="btn-class block_collection"
+                    style="margin-bottom: 0px; padding-bottom: 10px; padding-top: 10px; padding-left: 10px;
+                    padding-right: 10px; margin-top: 10px;">
+                <b style="font-size: 100%;">Читать далее</b>
+            </button>
+        </div>
+        <div id="h1" style="display:none; line-height: 1.5">
+            <p>
+                {{ manufacturer_singl_web.short_description_manufacturer | safe }}
+                {{ manufacturer_singl_web.description_manufacturer | safe }}
+            </p>
+            <div class="text-align: center">
+                <button type="submit" onClick="document.getElementById('h1').style.display='none';document.getElementById('h0').style.display='';return false;"
+                        class="btn-class block_collection"
+                        style="margin-bottom: 0px; padding-bottom: 10px; padding-top: 10px; padding-left: 10px;
+                        padding-right: 10px; margin-top: 10px;">
+                    <b style="font-size: 100%;">Скрыть текст</b>
+                </button>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-lg-3">
+                <img src="{{ manufacturer_singl_web.image_logo_manufacturer.url }}" class="img-responsive" alt="Logo_Atlas_Concorde" style="width: 100%;">
+        </div>
+    </div>
+</div>
+
+<div class="collection_products_item" style="padding-right: 40px; padding-left: 40px; margin-bottom: 5px;">
+    <div class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+    box-shadow: 0 0 6px rgba(0,0,0,0.2); padding-right: 20px;">
+        <div class="section">
+            <div class="row">
+                <div class="col-lg-3" align="center">
+                    <h2><b style="padding-left: 15px; color: #000000;">Быстрый отбор:</b></h2>
+                </div>
+                <form method="GET">
+
+                    <div class="col-lg-2">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px"
+                                data-toggle="dropdown">
+                                <b style="font-size: 95%;">
+                                    Выбор применения
+                                    <span class="caret"></span>
+                                </b>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            <li><a class="small" data-value="bathrooms" name="search_hight" value=bathrooms tabIndex="-1"><input name="application" value=bathrooms type="checkbox"/>&nbsp;Для ванных комнат</a></li>
+                            <li><a class="small" data-value="floor" name="search_hight" value=floor tabIndex="-1"><input name="application" value=floor type="checkbox"/>&nbsp;Для кухни / Напольная плитка</a></li>
+                            <li><a class="small" data-value="apron" name="search_hight" value=apron tabIndex="-1"><input name="application" value=apron type="checkbox"/>&nbsp;Для кухни / Фартук</a></li>
+                            <li><a class="small" data-value="outdoor" name="search_hight" value=outdoor tabIndex="-1"><input name="application" value=outdoor type="checkbox"/>&nbsp;Для уличного применения</a></li>
+                            <li><a class="small" data-value="residential" name="search_hight" value=residential tabIndex="-1"><input name="application" value=residential type="checkbox"/>&nbsp;Жилой интерьер</a></li>
+                            <li><a class="small" data-value="projects" name="search_hight" value=projects tabIndex="-1"><input name="application" value=projects type="checkbox"/>&nbsp;Общественные интерьеры</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">Выбор наличия</b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for availability_s_web in availability %}
+                                <li><a class="small" data-value="{{ availability_s_web.id }}" name="search_hight" value={{ availability_s_web.id }} tabIndex="-1"><input name="availability" value={{ availability_s_web.id }} type="checkbox"/>&nbsp;{{ availability_s_web.name_availability }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <button type="button" class="dropdown-toggle btn-class block_collection"
+                                style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px"
+                                data-toggle="dropdown">
+                            <b style="font-size: 95%;">Выбор цен. диапазона</b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 100%">
+                            {% for price_web in price_group %}
+                                <li><a class="small" data-value="{{ price_web.id }}" name="search_hight" value={{ price_web.id }} tabIndex="-1"><input name="price" value={{ price_web.id }} type="checkbox"/>&nbsp;{{ price_web.name_price_group }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <p><b style="font-size: 95%;"><input style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 11px"
+                                     class="block_main btn-can block_collection" type="submit" name="cancel" value="Сбросить фильтр"></b></p>
+                    </div>
+                    <br>
+
+                    <div class="col-lg-9 col-lg-offset-3">
+                        <p><b style="font-size: 95%;"><input style="border-radius: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; font-size: 12px"
+                                     class="btn-find block_key_big" type="submit" name="find" value="Искать"></b></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% if view_all_help == True %}
+    <div class="collection_products_item" style="padding-right: 40px; padding-left: 40px; margin-bottom: 5px;">
+        <ol class="breadcrumb breadcrumb-arrow" style="background-image: linear-gradient(#f5f5f5, #ffffff);
+        box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+            <div class="section">
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <h4><b style="padding-left: 15px">Критерии поиска: </b></h4>
+                    </div>
+
+                    <div class="col-lg-9">
+
+                        {% if view_all_price == True %}
+                            <h5>
+                                <span><b >Ценовой диаппазон:&nbsp;</b></span>
+                                {% for price_info in info_price_veb %}
+                                    <span>&nbsp;{{ price_info.name_price_group }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_availability == True %}
+                            <h5>
+                                <span><b>Наличие:&nbsp;</b></span>
+                                {% for availability_info in info_availability_veb %}
+                                    <span>&nbsp;{{ availability_info.name_availability }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                        {% if view_all_application == True %}
+                            <h5>
+                                <span><b>Применение:&nbsp;</b></span>
+                                {% for application in result_application %}
+                                    <span>&nbsp;{{ application }}&nbsp;&nbsp;</span>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </ol>
+    </div>
+{% endif %}
+
+<div style="padding-right: 40px; padding-left: 40px">
+    {% for collection_for_web in collection_web %}
+
+        <div class="visible-lg col-lg-3 product_item">
+            {% include 'products/collection_item.html' %}
+        </div>
+
+        <div class="visible-md col-md-4 product_item">
+            {% include 'products/collection_item.html' %}
+        </div>
+
+        <div class="visible-sm col-sm-6 product_item">
+            {% include 'products/collection_item.html' %}
+        </div>
+
+        <div class="visible-xs col-xs-12 product_item">
+            {% include 'products/collection_item.html' %}
+        </div>
+
+    {% endfor %}
+</div>
+
+{% if response_view == True %}
+    <div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+        <div class="row example-pagination">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="pagination" style="box-shadow: 0 0 3px rgba(0,0,0,0.1);">
+                    {% if collection_web.has_previous %}
+                        <li>
+                            <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection"
+                               href="{{ response_for_web.response }}&page={{ collection_web.previous_page_number }}">
+                                назад
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="disabled">
+                        <a style="margin-left: 10px; margin-right: 10px; color: #000000;">
+                            страница {{ collection_web.number }}
+                            из {{ collection_web.paginator.num_pages }}
+                        </a>
+                    </li>
+                    {% if collection_web.has_next %}
+                        <li>
+                            <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection"
+                               href="{{ response_for_web.response }}&page={{ collection_web.next_page_number }}">
+                                вперед
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% if response_view == False %}
+    <div class="section" align="center" style="padding-right: 40px; padding-left: 40px; padding-top: 10px">
+        <div class="row example-pagination">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul class="pagination">
+                    {% if collection_web.has_previous %}
+                        <li>
+                            <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection"
+                               href="?page={{ collection_web.previous_page_number }}">
+                                назад
+                            </a>
+                        </li>
+                    {% endif %}
+
+                        <li class="disabled">
+                            <a style="margin-left: 10px; margin-right: 10px; color: #000000;">
+                                страница {{ collection_web.number }}
+                                из {{ collection_web.paginator.num_pages }}
+                            </a>
+                        </li>
+                    {% if collection_web.has_next %}
+                        <li>
+                            <a style="margin-top: 0px; margin-bottom: 0px; padding-bottom: 7px; padding-top: 7px;" class="btn-class block_collection"
+                               href="?page={{ collection_web.next_page_number }}">
+                                вперед
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock content %}

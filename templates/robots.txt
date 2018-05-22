@@ -1,0 +1,13 @@
+User-agent: GoogleBot
+
+Disallow: /temp_files
+
+Allow: /*/*.js
+Allow: /*/*.css
+Allow: /media/*.png
+Allow: /media/*.jpg
+Allow: /media/*.jpeg
+Allow: /media/*.gif
+
+Host: http://atlas-concorde.kiev.ua/
+Sitemap: https://atlas-concorde.kiev.ua/sitemap.xml

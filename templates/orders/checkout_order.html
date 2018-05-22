@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% if products_in_bascet %}
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h1 class="text-center">Товары в Вашей корзине</h1>
+
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><h5><strong>Наименование товара</strong></h5></th>
+                                <th class="text-center"><h5><strong>Количество товара</strong></h5></th>
+                                <th class="text-center"><h5><strong>Ценовая категория товара</strong></h5></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product_in_bascet in products_in_bascet %}
+                                <tr>
+                                    <td>
+                                        <p style="margin-bottom: 0px;">{{ product_in_bascet.product.name_product }}</p>
+                                    </td>
+
+                                    <td>
+                                        <p style="margin-bottom: 0px;">{{ product_in_bascet.nmb }}</p>
+                                    </td>
+                                    <td>
+                                        <p style="margin-bottom: 0px;">{{ product_in_bascet.product.collection_product.price_group_collection }}</p>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="text-center" align="center" style="margin-bottom: 20px">
+                        <button type="submit" class="btn-find btn-lg btn-block block_collection" onclick="location.href='{% url 'checkout' %}'">Вернуться к редактированию заказа</button>
+                    </div>
+
+                    <form class="form-horizontal" method="post">{% csrf_token %}
+                        <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+
+                            <div class="form-group" style="margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;">
+                                <span class="form-error">{{ form.name.errors }}</span>
+                                <input type="text" name="{{ form.name.html_name }}" class="form" required="required"
+                                    value="{{ request.POST.name }}" placeholder="Введите ФИО ...">
+                            </div>
+                            <div class="form-group" style="margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;">
+                                <span class="form-error">{{ form.email.errors }}</span>
+                                <input type="email" name="{{ form.email.html_name }}" class="form" required="required"
+                                    value="{{ request.POST.email }}" placeholder="Введите Email ...">
+                            </div>
+
+                            <div class="form-group" style="margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;">
+                                <span class="form-error">{{ form.phone.errors }}</span>
+                                <input type="text" name="{{ form.phone.html_name }}" class="form" required="required"
+                                    value="{{ request.POST.phone }}" placeholder="Введите контактный телефон ...">
+                            </div>
+
+                            <div class="form-group" style="margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;">
+                                <span class="form-error">{{ form.adress.errors }}</span>
+                                <input type="text" name="{{ form.adress.html_name }}" class="form" required="required"
+                                    value="{{ request.POST.adress }}" placeholder="Введите адрес ...">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 wow animated slideInLeft" data-wow-delay=".5s">
+                            <div class="form-group" style="margin-right: 5px; margin-bottom: 5px; margin-top: 5px; margin-left: 5px;">
+                                <span class="form-error">{{ form.comment.errors }}</span>
+                                <textarea type="text" name="{{ form.comment.html_name }}" class="form textarea"
+                                    value="{{ request.POST.comment }}" placeholder="Оставте комментарий к заказу..." style="height: 290px;">
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="text-right" align="center">
+                            <button type="submit" class="btn-find btn-lg btn-block block_collection" href="#send_form">Сделать заказ</button>
+                        </div>
+
+                    </form>
+                </div>
+            {% else %}
+                <h2 class="text-center" >В Вашей корзине нет товаров</h2>
+            {% endif %}
+            <div class="text-lg-12">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+
+    <div class="modal-dialog" style="width: 100%">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px; border-bottom: 0px;padding-top: 10px;padding-right: 10px;padding-bottom: 0px;padding-left: 0px;">
+
+                <div align="right">
+                    <button class="block_collection btn-class" type="button" data-dismiss="modal" id="button_{{ list_img_product.marker }}"
+                            style="padding-top: 5px; padding-left: 5px; padding-bottom: 5px; padding-right: 5px; margin-right: 20px; margin-bottom: 10px; margin-top: 10px;">
+                        Закрыть окно
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body" style="padding-top: 0px; padding-bottom: 0px;">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                        <img style="width: 100%;" src="{{ product_image.image.url }}" class="img-responsive img-center-product" alt="Img-prod" >
+                    </div>
+                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                        <div class="tab-content product-description-tabs">
+                            <div role="tabpanel" class="tab-pane active" id="description">
+                                <div style="padding-top: 10px; padding-left: 20px; padding-right: 20px;padding-bottom: 20px; line-height: 1.5">
+
+                                    <div align="center" style="padding-top: 0px">
+                                        <h5 style="font-size: 90%; margin-left: 5px"><b>Производитель: {{ product_image.product.collection_product.manufacturer_collection.name_manufacturer }}</b></h5>
+                                        <h1 style="font-size: 250%; margin-left: 5px"><b>{{ product_image.product.name_product }}</b></h1>
+                                        <h5 style="font-size: 90%; margin-left: 5px"><b>Коллекция: {{ product_image.product.collection_product.name_collection }}</b></h5>
+                                    </div>
+                                    <div style="padding-top: 0px">
+                                        <hr style="margin-bottom: 0px; margin-top: 0px; border-top: 3px solid #ffbf00">
+                                        <h5 style="font-size: 100%">
+                                            <div style="margin-top: 50px">
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><b><span style="font-size: 90%;">Тип: </span></b></p></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><span style="font-size: 90%;">{{ product_image.product.product_type_product.name_product_type }}</span></p></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><b><span style="font-size: 90%;">Наличие: </span></b></p></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><span style="font-size: 90%;">{{ collection_singl_web.availability_collection.name_availability }}</span></p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><b><span style="font-size: 90%;">Размер: </span></b></p></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><span style="font-size: 90%;">{{ product_image.product.size_product }}</span></p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><b><span style="font-size: 90%;">Код продукта: </span></b></p></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><span style="font-size: 90%;">{{ product_image.product.vendor_code_product }}</span></p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><b><span style="font-size: 90%;">Цена: </span></b></p></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><span style="font-size: 90%;">По запросу</span></p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="column_left" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><b><span style="font-size: 90%;">Страна-производитель: </span></b></p></td>
+                                                        <td class="column_right" style="padding-top: 5px; padding: 3px; border-bottom: 1px solid #f4f4f4;"><p style="margin-bottom: 0px;"><span style="font-size: 90%;">{{ product_image.product.collection_product.manufacturer_collection.manufacturer_country.name_manufacturer_country }}</span></p></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 50px">
+                            <form id="{{ list_img_product.marker }}" class="form-inline" action = "{% url 'basket_adding' %}">{% csrf_token %}
+
+                                <div class="img-center" style="margin-top: 50px">
+                                    <div class="block_collection btn-class">
+                                        <input id="input_{{ list_img_product.marker }}" class="form-control" style="border:1px solid #efefef;"
+                                               type="number"
+                                               name="number" id="{{ list_img_product.marker_re }}"
+                                               data-product_id_re = "{{ list_img_product.id }}"
+                                               data-product_id = "{{ list_img_product.id }}"
+                                               data-name = "{{ list_img_product.name }}"
+                                               name-in-form = "{{ list_img_product.marker }}"
+                                               name-in-form-re = "{{ list_img_product.marker_re }}"
+                                               name-in-form-target = "{{ list_img_product.data_target }}"
+                                               placeholder="Введите количество ..."
+                                        >
+                                    </div>
+                                    <span style="margin-left: 10px; margin-right: 10px;"><strong style="font-size: 120%">[ м<sup><small>2</small></sup> ]</strong></span>
+
+                                    <button id="button_send_{{ list_img_product.marker }}"
+                                        class="btn btn-success btn-buy btn-class block_collection" type="submit"
+                                        style="padding-top: 10px; padding-left: 15px; padding-bottom: 10px; padding-right: 15px; margin-top: 5px;"
+                                        data-product_id = "{{ list_img_product.id }}"
+                                        data-name = "{{ list_img_product.name }}"
+                                        name-in-form = "{{ list_img_product.marker }}"
+                                        name-in-form-re = "{{ list_img_product.marker_re }}"
+                                        >
+                                        Купить
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding-left: 0px; padding-right: 0px; padding-top: 0px; padding-bottom: 0px">
+
+            </div>
+        </div>
+    </div>

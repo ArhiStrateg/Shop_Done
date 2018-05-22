@@ -1,0 +1,38 @@
+
+    <div class="col-lg-3 product_item">
+        <div class="parent">
+            <div class="child">
+                <div>
+                    <a href="{% url 'products_singl' product_image.product.id %}">
+                        <img src="{{ product_image.image_mini.url }}" class="img-responsive">
+                    </a>
+                </div>
+                <div>
+                    <a href="{% url 'products_singl_ukr' product_image.product.id %}">
+                        <h5 class="text-center" style="line-height: 1.5">
+                            <span>
+                                {{ product_image.product.collection_product.manufacturer_collection }} {{ product_image.product.collection_product }}<br>
+                                <strong><b>{{ product_image.product.name_product }}</b></strong>
+                            </span>
+                        </h5>
+
+                        <h5 class="text-center" style="line-height: 1.5">
+                            Розмір: {{ product_image.product.size_product }}<br>
+                            Артикул: {{ product_image.product.vendor_code_product }}<br>
+                            Ціна: По запросу
+                        </h5>
+                    </a>
+                    <div class="add-to-card-btn text-center">
+                        <p>
+                            <a href="{% url 'products_singl_ukr' product_image.product.id %}">
+                                <button class="btn btn-lg btn-block btn-success" style="padding-top: 10px; padding-bottom: 10px">Детальніше</button>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

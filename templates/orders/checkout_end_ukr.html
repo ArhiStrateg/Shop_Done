@@ -1,0 +1,51 @@
+{% extends 'base_ukr.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <h3 class="text-center">Дякуємо Вам за вибір нашого Інтернет Магазину</h3>
+                    <h4 class="text-center">Нижче перераховані Ваші придбання</h4>
+
+                    {% for product_in_orders in products_in_orders %}
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Номер замовлення</th>
+                                    <th class="text-center">Найменування товару</th>
+                                    <th class="text-center">Кількість товару</th>
+                                    <th class="text-center">Цінова категорія товару</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                    <tr>
+                                        <td>
+                                            {{ product_in_orders.order }}
+                                        </td>
+                                        <td>
+                                            {{ product_in_orders.product.name_product }}
+                                        </td>
+                                        <td>
+                                            {{ product_in_orders.nmb }}
+                                        </td>
+                                        <td>
+                                            {{ product_in_orders.product.collection_product.price_group_collection }}
+                                        </td>
+                                    </tr>
+
+                            </tbody>
+                        </table>
+                    <hr>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-lg btn-block btn-success" onclick="location.href='{% url 'main_ukr' %}'">Повернутися на головну</button>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+{% endblock %}
